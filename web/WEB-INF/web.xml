@@ -7,7 +7,7 @@
     </servlet>
     <servlet>
         <servlet-name>WelcomePage</servlet-name>
-        <jsp-file>/WelcomePage.html</jsp-file>
+        <jsp-file>/WelcomePage.jsp</jsp-file>
     </servlet>
     <servlet>
         <servlet-name>ReadTable</servlet-name>
