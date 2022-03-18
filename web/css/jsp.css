@@ -1,0 +1,28 @@
+/*html{background: blue;}*/
+
+body{
+    font-family: Arial;
+    background-color:blueviolet;
+}
+.pseudo{
+    width:280px; 
+    height:30px;
+}
+
+.psw{
+    width:246px; 
+    height:30px;
+}
+
+.sb{
+    background-color:#4169E1;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
