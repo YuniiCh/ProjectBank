@@ -1,8 +1,10 @@
-/*html{background: blue;}*/
+html {
+    background: white;
+}
 
 body{
     font-family: Arial;
-    background-color:blueviolet;
+    background-color:#D8F0F0;
 }
 .pseudo{
     width:280px; 

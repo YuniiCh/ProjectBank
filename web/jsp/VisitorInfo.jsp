@@ -7,7 +7,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link rel="stylesheet" href="../css/jsp.css" type="text/css" />
+        <link rel="stylesheet" href="../css/j.css" type="text/css" />
         <title>获取数据</title>
     </head>
     <body>
@@ -48,6 +48,6 @@
         %>
         <div>${requestScope.msg_reussi}<div>
         <br/>
-        <a href="ctrlCentral?fct=welcome"> Retour vers l'acceuil</a>
+        <a href="ctrlCentral?fct=acceuil"> Retour vers l'acceuil</a>
     </body>
 </html>

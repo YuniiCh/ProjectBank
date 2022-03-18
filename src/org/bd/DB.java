@@ -29,7 +29,7 @@ public class DB
 	/*----- Données de connexion -----*/
 	private static final String URL ="jdbc:mysql://localhost:3306/citi";
 	private static final String LOGIN = "root";
-	private static final String PASSWORD = "0828cyn";
+	private static final String PASSWORD = "0000";
 
 
 	/*----------*/

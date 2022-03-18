@@ -1,17 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="2.4" xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
-    <display-name>Développement d'application internet</display-name>
-    <servlet>
-        <servlet-name>ServletAuteur</servlet-name>
-        <servlet-class>org.ctrl.ServletAuteur</servlet-class>
-    </servlet>
+    <display-name>Project Bank</display-name>
     <servlet>
         <servlet-name>WelcomePage</servlet-name>
-        <jsp-file>/WelcomePage.jsp</jsp-file>
+        <jsp-file>/jsp/WelcomePage.jsp</jsp-file>
     </servlet>
     <servlet>
-        <servlet-name>ReadTable</servlet-name>
-        <jsp-file>/jsp/ReadTable.jsp</jsp-file>
+        <servlet-name>AllCompanyInfos</servlet-name>
+        <jsp-file>/jsp/AllCompanyInfos.jsp</jsp-file>
     </servlet>
     <servlet>
         <servlet-name>BConnectionCtrl</servlet-name>
@@ -37,18 +33,10 @@
         <servlet-name>VisitorInfo</servlet-name>
         <jsp-file>/jsp/VisitorInfo.jsp</jsp-file>
     </servlet>
-    <servlet-mapping>
-        <servlet-name>ServletAuteur</servlet-name>
-        <url-pattern>/ServletAuteur</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>ReadTable</servlet-name>
-        <url-pattern>/ReadTable</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>WelcomePage</servlet-name>
-        <url-pattern>/</url-pattern>
-    </servlet-mapping>
+    <servlet>
+        <servlet-name>ResultRapportCtrl</servlet-name>
+        <servlet-class>org.ctrl.ResultRapportCtrl</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>WelcomePageCtrl</servlet-name>
         <url-pattern>/WelcomePageCtrl</url-pattern>
@@ -73,12 +61,24 @@
         <servlet-name>VisitorInfo</servlet-name>
         <url-pattern>/VisitorInfo</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ResultRapportCtrl</servlet-name>
+        <url-pattern>/ResultRapportCtrl</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AllCompanyInfos</servlet-name>
+        <url-pattern>/AllCompanyInfos</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>WelcomePage</servlet-name>
+        <url-pattern>/WelcomePage</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30
         </session-timeout>
     </session-config>
     <welcome-file-list>
-        <welcome-file>Auteurs</welcome-file>
+        <welcome-file>jsp/WelcomePage.jsp</welcome-file>
     </welcome-file-list>
 </web-app>
