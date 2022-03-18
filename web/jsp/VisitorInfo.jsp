@@ -48,6 +48,6 @@
         %>
         <div>${requestScope.msg_reussi}<div>
         <br/>
-        <a href="ctrlCentral?fct=acceuil"> Retour vers l'acceuil</a>
+        <a href="ctrlCentral?fct=welcome"> Retour vers l'acceuil</a>
     </body>
 </html>
