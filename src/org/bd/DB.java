@@ -19,9 +19,6 @@ import java.util.logging.Logger;
  */
 public class DB
 {
-	/*---------*/
-	/* Données */
-	/*---------*/
 
 	/*----- Connexion -----*/
 	private static Connection CX = null;
