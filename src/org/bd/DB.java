@@ -182,7 +182,8 @@ public class DB {
     }
 
 //Find a company's financial data
-    public static Finance findFinanceByID(String idC) throws Exception {
+    public static List<Finance> readFinanceByID(String idC) throws Exception {
+        List<Finance> liste = new ArrayList<>();
         // Connexion
         if (CX == null) {
             DB.connexion();
@@ -224,13 +225,14 @@ public class DB {
                         rs.getFloat("Deferred_assets"),
                         rs.getFloat("SCOSE"),
                         DB.findCompany(rs.getString("IdC")));
-                return f;
+
+                liste.add(f);
             }
 
         } catch (SQLException sqle) {
             throw new Exception("MessageBD.readFinances() - " + sqle.getMessage());
         }
-        return null;
+        return liste;
     }
 
     /*----------------------------*/
@@ -263,13 +265,15 @@ public class DB {
                 Logger.getLogger(DB.class.getName()).log(Level.SEVERE, null, ex);
             }*/
         // test readFinancesByIdC
-        Finance F2 = new Finance();
+        List<Finance> F2 = new ArrayList<>();
         try {
-            F2 = DB.findFinanceByID("US2605571031");
+            F2 = DB.readFinanceByID("US2605571031");
         } catch (Exception ex) {
             Logger.getLogger(DB.class.getName()).log(Level.SEVERE, null, ex);
         }
-            System.out.println(F2);
+        for (Finance f : F2) {
+            System.out.println(f);
+        }
     }
 
 }
