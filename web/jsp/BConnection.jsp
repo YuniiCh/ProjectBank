@@ -18,7 +18,7 @@
         </form>
         
         <!-- 登录失败信息显示 -->
-        <%
+        <% ///
             String avert = (String)request.getAttribute("avert");
             if(avert != null)
                 out.println("<div class=\"avertissement\">" + avert + "</div>");

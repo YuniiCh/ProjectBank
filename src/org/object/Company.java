@@ -24,11 +24,11 @@ public class Company {
     String Website;
     String RegisteredAddress;
     String OfficeAddress;
-    List<Finance> financeRepport;
+
     
     // Constructor
     public Company() {
-        this.financeRepport = new ArrayList<>();
+        
     }
     public Company(String IdC, String EnglishName, String ChineseName, String CreateDate, String Industry, String SecurityCode, String SecurityType, Date ListingDate, String ListingExchange, String Chairman, String Employees, String Tel, String Fax, String Email, String Website, String RegisteredAddress, String OfficeAddress) {
         this.IdC = IdC;
@@ -48,7 +48,6 @@ public class Company {
         this.Website = Website;
         this.RegisteredAddress = RegisteredAddress;
         this.OfficeAddress = OfficeAddress;
-        this.financeRepport = new ArrayList<>();
     }
     
     // Getter & Setter
@@ -188,14 +187,6 @@ public class Company {
         this.OfficeAddress = OfficeAddress;
     }
 
-    public List<Finance> getFinanceRepport() {
-        return financeRepport;
-    }
-
-    public void setFinanceRepport(List<Finance> financeRepport) {
-        this.financeRepport = financeRepport;
-    }
-    
     // HashCode & equals
 
     @Override

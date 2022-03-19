@@ -19,7 +19,7 @@ import org.object.Finance;
 public class ReportCtrl extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, Exception {
-        Finance f = (Finance) DB.findFinance(request.getParameter("idC"));
+        Finance f = (Finance) DB.findFinanceByID(request.getParameter("idC"));
 
     }
 

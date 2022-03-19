@@ -1,6 +1,5 @@
 package org.bd;
 
-
 import org.object.Company;
 import org.object.Finance;
 import java.sql.Connection;
@@ -13,257 +12,242 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-
 /**
  * Classe en charge de la base de données.
  */
-public class DB
-{
-	/*---------*/
-	/* Données */
-	/*---------*/
+public class DB {
 
-	/*----- Connexion -----*/
-	private static Connection CX = null;
+    /*----- 连接数据库 -----*/
+    private static Connection CX = null;
 
-	/*----- Données de connexion -----*/
-	private static final String URL ="jdbc:mysql://localhost:3306/citi";
-	private static final String LOGIN = "root";
-	private static final String PASSWORD = "0828cyn";
+    /*----- 准备连接数据 -----*/
+    private static final String URL = "jdbc:mysql://localhost:3306/citi";
+    private static final String LOGIN = "root";
+    private static final String PASSWORD = "0828cyn";
 
+    /**
+     * 创建连接
+     */
+    private static void connexion() throws ClassNotFoundException, SQLException {
 
-	/*----------*/
-	/* Méthodes */
-	/*----------*/
-
-	/**
-	 * Crée la connexion avec la base de données.
-	 */
-	private static void connexion() throws ClassNotFoundException, SQLException
-        {
-            /*----- Chargement du pilote pour la BD -----*/
-            try {
-                    Class.forName("com.mysql.cj.jdbc.Driver");
-                    }
-            catch (ClassNotFoundException ex)
-                    {
-                    throw new ClassNotFoundException("Exception connexion() - Pilote MySql introuvable - " + ex.getMessage());
-                    }
-
-            /*----- Ouverture de la connexion -----*/
-            try {
-                    DB.CX = DriverManager.getConnection(URL,LOGIN,PASSWORD);
-                    }
-            catch (SQLException ex)
-                    {
-                    throw new SQLException("Exception connexion() - Problème de connexion à la base de données - " + ex.getMessage());
-                    }
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (ClassNotFoundException ex) {
+            throw new ClassNotFoundException("Exception connexion() - Pilote MySql introuvable - " + ex.getMessage());
         }
 
+        /*----- 建立连接 -----*/
+        try {
+            DB.CX = DriverManager.getConnection(URL, LOGIN, PASSWORD);
+        } catch (SQLException ex) {
+            throw new SQLException("Exception connexion() - Problème de connexion à la base de données - " + ex.getMessage());
+        }
+    }
 
-	
-	public static List<Company> readCompanies () throws Exception
-        {
-            List<Company> liste = new ArrayList<>();
+    public static List<Company> readCompanies() throws Exception {
+        List<Company> liste = new ArrayList<>();
 
-            // Connexion
-            if(CX == null)
-                DB.connexion();
+        // 检查建立连接
+        if (CX == null) {
+            DB.connexion();
+        }
 
-            // Requête SQL
-            String sql = "SELECT * FROM Company";
+        // SQL
+        String sql = "SELECT * FROM Company";
 
-            // Ouverture d'un espace de requête
-            try(PreparedStatement st = CX.prepareStatement(sql)){
-                ResultSet rs = st.executeQuery();
+        // 执行SQL
+        try (PreparedStatement st = CX.prepareStatement(sql)) {
+            ResultSet rs = st.executeQuery();
 
-                // Lire le résultat
-                while(rs.next()){
-                    Company c = new Company(rs.getString("IdC"),
-                                            rs.getString("EnglishName"),
-                                            rs.getString("ChineseName"),
-                                            rs.getString("CreateDate"),
-                                            rs.getString("Industry"),
-                                            rs.getString("SecurityCode"),
-                                            rs.getString("SecurityType"),
-                                            rs.getDate("ListingDate"),
-                                            rs.getString("ListingExchange"),
-                                            rs.getString("Chairman"),
-                                            rs.getString("Employees"),
-                                            rs.getString("Tel"),
-                                            rs.getString("Fax"),
-                                            rs.getString("Email"),
-                                            rs.getString("Website"),
-                                            rs.getString("RegisteredAddress"),
-                                            rs.getString("OfficeAddress"));
-                    liste.add(c);
-                }
-
-            }catch(SQLException sqle){
-                throw new Exception("MessageBD.readCompanies() - "+ sqle.getMessage());
+            // 读取结果 
+            while (rs.next()) {
+                Company c = new Company(rs.getString("IdC"),
+                        rs.getString("EnglishName"),
+                        rs.getString("ChineseName"),
+                        rs.getString("CreateDate"),
+                        rs.getString("Industry"),
+                        rs.getString("SecurityCode"),
+                        rs.getString("SecurityType"),
+                        rs.getDate("ListingDate"),
+                        rs.getString("ListingExchange"),
+                        rs.getString("Chairman"),
+                        rs.getString("Employees"),
+                        rs.getString("Tel"),
+                        rs.getString("Fax"),
+                        rs.getString("Email"),
+                        rs.getString("Website"),
+                        rs.getString("RegisteredAddress"),
+                        rs.getString("OfficeAddress"));
+                liste.add(c);
             }
-            return liste;
+
+        } catch (SQLException sqle) {
+            throw new Exception("MessageBD.readCompanies() - " + sqle.getMessage());
         }
-        
-        public static Company findCompany (String IdC) throws Exception
-        {
-            Company c = new Company();
+        return liste;
+    }
 
-            // Connexion
-            if(CX == null)
-                DB.connexion();
+    public static Company findCompany(String IdC) throws Exception {
+        Company c = new Company();
 
-            // Requête SQL
-            String sql = "SELECT * FROM Company WHERE IdC = '"+IdC+"'";
-            // Ouverture d'un espace de requête
-            try(PreparedStatement st = CX.prepareStatement(sql)){
-                ResultSet rs = st.executeQuery();
+        // 检查建立连接
+        if (CX == null) {
+            DB.connexion();
+        }
 
-                // Lire le résultat
-                while(rs.next()){
-                    c = new Company(rs.getString("IdC"),
-                                    rs.getString("EnglishName"),
-                                    rs.getString("ChineseName"),
-                                    rs.getString("CreateDate"),
-                                    rs.getString("Industry"),
-                                    rs.getString("SecurityCode"),
-                                    rs.getString("SecurityType"),
-                                    rs.getDate("ListingDate"),
-                                    rs.getString("ListingExchange"),
-                                    rs.getString("Chairman"),
-                                    rs.getString("Employees"),
-                                    rs.getString("Tel"),
-                                    rs.getString("Fax"),
-                                    rs.getString("Email"),
-                                    rs.getString("Website"),
-                                    rs.getString("RegisteredAddress"),
-                                    rs.getString("OfficeAddress"));                 
-                }
+        // SQL
+        String sql = "SELECT * FROM Company WHERE IdC = '" + IdC + "'";
+        // 执行SQL
+        try (PreparedStatement st = CX.prepareStatement(sql)) {
+            ResultSet rs = st.executeQuery();
 
-            }catch(SQLException sqle){
-                throw new Exception("MessageBD.findCompany() - "+ sqle.getMessage());
+            // 读取结果
+            while (rs.next()) {
+                c = new Company(rs.getString("IdC"),
+                        rs.getString("EnglishName"),
+                        rs.getString("ChineseName"),
+                        rs.getString("CreateDate"),
+                        rs.getString("Industry"),
+                        rs.getString("SecurityCode"),
+                        rs.getString("SecurityType"),
+                        rs.getDate("ListingDate"),
+                        rs.getString("ListingExchange"),
+                        rs.getString("Chairman"),
+                        rs.getString("Employees"),
+                        rs.getString("Tel"),
+                        rs.getString("Fax"),
+                        rs.getString("Email"),
+                        rs.getString("Website"),
+                        rs.getString("RegisteredAddress"),
+                        rs.getString("OfficeAddress"));
             }
-            return c;
+
+        } catch (SQLException sqle) {
+            throw new Exception("MessageBD.findCompany() - " + sqle.getMessage());
         }
-        
-        public static List<Finance> readFinances () throws Exception
-        {
-            List<Finance> liste = new ArrayList<>();
+        return c;
+    }
 
-            // Connexion
-            if(CX == null)
-                DB.connexion();
+    public static List<Finance> readFinances() throws Exception {
+        List<Finance> liste = new ArrayList<>();
 
-            // Requête SQL
-            String sql = "SELECT * FROM Finance";
+        // Connexion
+        if (CX == null) {
+            DB.connexion();
+        }
 
-            // Ouverture d'un espace de requête
-            try(PreparedStatement st = CX.prepareStatement(sql)){
-                ResultSet rs = st.executeQuery();
+        // Requête SQL
+        String sql = "SELECT * FROM Finance";
 
-                // Lire le résultat
-                while(rs.next()){
-                    Finance f = new Finance(rs.getInt("IdF"),
-                                            rs.getDate("Date"),
-                                            rs.getFloat("liabilities"),
-                                            rs.getFloat("assets"),
-                                            rs.getFloat("current_assets"),
-                                            rs.getFloat("current_liabilities"),
-                                            rs.getFloat("inventories"),
-                                            rs.getFloat("shareholders_equity"),
-                                            rs.getFloat("profits_payable"),
-                                            rs.getFloat("Short_loans"),
-                                            rs.getFloat("Long_loans"),
-                                            rs.getFloat("net_profit"),
-                                            rs.getFloat("Operating_profit"),
-                                            rs.getFloat("Operating_cost"),
-                                            rs.getFloat("Income_tax_paid"),
-                                            rs.getFloat("AEADNGL"),
-                                            rs.getFloat("Selling_expenses"),
-                                            rs.getFloat("business_tariff_and_annex"),
-                                            rs.getFloat("CPDDP"),
-                                            rs.getFloat("NCFOA"),
-                                            rs.getFloat("Cash_from_borrow"),
-                                            rs.getFloat("CRAB"),
-                                            rs.getFloat("CPFAIALA"),
-                                            rs.getFloat("DFAOGAPBA"),
-                                            rs.getFloat("Deferred_assets"),
-                                            rs.getFloat("SCOSE"));
-                    liste.add(f);
-                }
+        // Ouverture d'un espace de requête
+        try (PreparedStatement st = CX.prepareStatement(sql)) {
+            ResultSet rs = st.executeQuery();
 
-            }catch(SQLException sqle){
-                throw new Exception("MessageBD.readFinances() - "+ sqle.getMessage());
+            // Lire le résultat
+            while (rs.next()) {
+                Finance f = new Finance(rs.getInt("IdF"),
+                        rs.getDate("Date"),
+                        rs.getFloat("liabilities"),
+                        rs.getFloat("assets"),
+                        rs.getFloat("current_assets"),
+                        rs.getFloat("current_liabilities"),
+                        rs.getFloat("inventories"),
+                        rs.getFloat("shareholders_equity"),
+                        rs.getFloat("profits_payable"),
+                        rs.getFloat("Short_loans"),
+                        rs.getFloat("Long_loans"),
+                        rs.getFloat("net_profit"),
+                        rs.getFloat("Operating_profit"),
+                        rs.getFloat("Operating_cost"),
+                        rs.getFloat("Income_tax_paid"),
+                        rs.getFloat("AEADNGL"),
+                        rs.getFloat("Selling_expenses"),
+                        rs.getFloat("business_tariff_and_annex"),
+                        rs.getFloat("CPDDP"),
+                        rs.getFloat("NCFOA"),
+                        rs.getFloat("Cash_from_borrow"),
+                        rs.getFloat("CRAB"),
+                        rs.getFloat("CPFAIALA"),
+                        rs.getFloat("DFAOGAPBA"),
+                        rs.getFloat("Deferred_assets"),
+                        rs.getFloat("SCOSE"),
+                        DB.findCompany(rs.getString("IdC")));
+                liste.add(f);
             }
-            return liste;
+
+        } catch (SQLException sqle) {
+            throw new Exception("MessageBD.readFinances() - " + sqle.getMessage());
         }
-        
+        return liste;
+    }
+
 //Find a company's financial data
-         public static Finance findFinance (String idC) throws Exception
-        {
-            // Connexion
-            if(CX == null)
-                DB.connexion();
-
-            // Requête SQL
-            String sql = "SELECT * FROM Finance WHERE idC = ";
-
-            // Ouverture d'un espace de requête
-            try(PreparedStatement st = CX.prepareStatement(sql)){
-                ResultSet rs = st.executeQuery();
-
-                // Lire le résultat
-                while(rs.next()){
-                    Finance f = new Finance(rs.getInt("IdF"),
-                                            rs.getDate("Date"),
-                                            rs.getFloat("liabilities"),
-                                            rs.getFloat("assets"),
-                                            rs.getFloat("current_assets"),
-                                            rs.getFloat("current_liabilities"),
-                                            rs.getFloat("inventories"),
-                                            rs.getFloat("shareholders_equity"),
-                                            rs.getFloat("profits_payable"),
-                                            rs.getFloat("Short_loans"),
-                                            rs.getFloat("Long_loans"),
-                                            rs.getFloat("net_profit"),
-                                            rs.getFloat("Operating_profit"),
-                                            rs.getFloat("Operating_cost"),
-                                            rs.getFloat("Income_tax_paid"),
-                                            rs.getFloat("AEADNGL"),
-                                            rs.getFloat("Selling_expenses"),
-                                            rs.getFloat("business_tariff_and_annex"),
-                                            rs.getFloat("CPDDP"),
-                                            rs.getFloat("NCFOA"),
-                                            rs.getFloat("Cash_from_borrow"),
-                                            rs.getFloat("CRAB"),
-                                            rs.getFloat("CPFAIALA"),
-                                            rs.getFloat("DFAOGAPBA"),
-                                            rs.getFloat("Deferred_assets"),
-                                            rs.getFloat("SCOSE"));
-                    return f;
-                }
-
-            }catch(SQLException sqle){
-                throw new Exception("MessageBD.readFinances() - "+ sqle.getMessage());
-            }
-            return null;
+    public static Finance findFinanceByID(String idC) throws Exception {
+        // Connexion
+        if (CX == null) {
+            DB.connexion();
         }
 
-	/*----------------------------*/
-	/* Programme principal (test) */
-	/*----------------------------*/
+        // Requête SQL
+        String sql = "SELECT * FROM Finance WHERE idC = '" + idC + "'";
 
-	public static void main (String[] s)
-	{
-            
-            /*List<Company> listC = new ArrayList<>();
+        // Ouverture d'un espace de requête
+        try (PreparedStatement st = CX.prepareStatement(sql)) {
+            ResultSet rs = st.executeQuery();
+
+            // Lire le résultat
+            while (rs.next()) {
+                Finance f = new Finance(rs.getInt("IdF"),
+                        rs.getDate("Date"),
+                        rs.getFloat("liabilities"),
+                        rs.getFloat("assets"),
+                        rs.getFloat("current_assets"),
+                        rs.getFloat("current_liabilities"),
+                        rs.getFloat("inventories"),
+                        rs.getFloat("shareholders_equity"),
+                        rs.getFloat("profits_payable"),
+                        rs.getFloat("Short_loans"),
+                        rs.getFloat("Long_loans"),
+                        rs.getFloat("net_profit"),
+                        rs.getFloat("Operating_profit"),
+                        rs.getFloat("Operating_cost"),
+                        rs.getFloat("Income_tax_paid"),
+                        rs.getFloat("AEADNGL"),
+                        rs.getFloat("Selling_expenses"),
+                        rs.getFloat("business_tariff_and_annex"),
+                        rs.getFloat("CPDDP"),
+                        rs.getFloat("NCFOA"),
+                        rs.getFloat("Cash_from_borrow"),
+                        rs.getFloat("CRAB"),
+                        rs.getFloat("CPFAIALA"),
+                        rs.getFloat("DFAOGAPBA"),
+                        rs.getFloat("Deferred_assets"),
+                        rs.getFloat("SCOSE"),
+                        DB.findCompany(rs.getString("IdC")));
+                return f;
+            }
+
+        } catch (SQLException sqle) {
+            throw new Exception("MessageBD.readFinances() - " + sqle.getMessage());
+        }
+        return null;
+    }
+
+    /*----------------------------*/
+ /* Programme principal (test) */
+ /*----------------------------*/
+    public static void main(String[] s) {
+
+        /* // test readCompanies
+            List<Company> listC = new ArrayList<>();
             try {
                 listC = DB.readCompanies();
             } catch (Exception ex) {
                 Logger.getLogger(DB.class.getName()).log(Level.SEVERE, null, ex);
             }
-            for (Company c : listC) System.out.println(c);*/
+            for (Company c : listC) System.out.println(c);
             
+            // test readFinances
             List<Finance> listF = new ArrayList<>();
             try {
                 listF = DB.readFinances();
@@ -271,12 +255,22 @@ public class DB
                 Logger.getLogger(DB.class.getName()).log(Level.SEVERE, null, ex);
             }
             for (Finance f : listF) System.out.println(f);
-      
+            
+            // test findCompany
             try {  
                 System.out.println(DB.findCompany("US0378331005"));
             } catch (Exception ex) {
                 Logger.getLogger(DB.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            }*/
+        // test readFinancesByIdC
+        Finance F2 = new Finance();
+        try {
+            F2 = DB.findFinanceByID("US2605571031");
+        } catch (Exception ex) {
+            Logger.getLogger(DB.class.getName()).log(Level.SEVERE, null, ex);
         }
+            System.out.println(F2);
+    }
 
-} /*----- Fin de la classe Bd -----*/
+}
+/*----- Fin de la classe Bd -----*/
