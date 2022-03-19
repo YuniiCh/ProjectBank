@@ -35,7 +35,7 @@ public class Finance {
     public Finance() {
     }
 
-    public Finance(int IdF, Date DateF, float liabilities, float assets, float current_assets, float current_liabilities, float inventories, float shareholders_equity, float profits_payable, float Short_loans, float Long_loans, float net_profit, float Operating_profit, float Operating_cost, float Income_tax_paid, float AEADNGL, float Selling_expenses, float business_tariff_and_annex, float CPDDP, float NCFOA, float Cash_from_borrow, float CRAB, float CPFAIALA, float DFAOGAPBA, float Deferred_assets, float SCOSE) {
+    public Finance(int IdF, Date DateF, float liabilities, float assets, float current_assets, float current_liabilities, float inventories, float shareholders_equity, float profits_payable, float Short_loans, float Long_loans, float net_profit, float Operating_profit, float Operating_cost, float Income_tax_paid, float AEADNGL, float Selling_expenses, float business_tariff_and_annex, float CPDDP, float NCFOA, float Cash_from_borrow, float CRAB, float CPFAIALA, float DFAOGAPBA, float Deferred_assets, float SCOSE, Company company) {
         this.IdF = IdF;
         this.DateF = DateF;
         this.liabilities = liabilities;
@@ -62,7 +62,9 @@ public class Finance {
         this.DFAOGAPBA = DFAOGAPBA;
         this.Deferred_assets = Deferred_assets;
         this.SCOSE = SCOSE;
+        this.company = company;
     }
+
     
     // Setter & Getter
 
@@ -313,7 +315,7 @@ public class Finance {
 
     @Override
     public String toString() {
-        return "Finance{" + "IdF=" + IdF + ", DateF=" + DateF + ", liabilities=" + liabilities + ", assets=" + assets + ", current_assets=" + current_assets + ", current_liabilities=" + current_liabilities + ", inventories=" + inventories + ", shareholders_equity=" + shareholders_equity + ", profits_payable=" + profits_payable + ", Short_loans=" + Short_loans + ", Long_loans=" + Long_loans + ", net_profit=" + net_profit + ", Operating_profit=" + Operating_profit + ", Operating_cost=" + Operating_cost + ", Income_tax_paid=" + Income_tax_paid + ", AEADNGL=" + AEADNGL + ", Selling_expenses=" + Selling_expenses + ", business_tariff_and_annex=" + business_tariff_and_annex + ", CPDDP=" + CPDDP + ", NCFOA=" + NCFOA + ", Cash_from_borrow=" + Cash_from_borrow + ", CRAB=" + CRAB + ", CPFAIALA=" + CPFAIALA + ", DFAOGAPBA=" + DFAOGAPBA + ", Deferred_assets=" + Deferred_assets + ", SCOSE=" + SCOSE + '}';
+        return "Finance{" + "IdF=" + IdF + ", DateF=" + DateF + ", liabilities=" + liabilities + ", assets=" + assets + ", current_assets=" + current_assets + ", current_liabilities=" + current_liabilities + ", inventories=" + inventories + ", shareholders_equity=" + shareholders_equity + ", profits_payable=" + profits_payable + ", Short_loans=" + Short_loans + ", Long_loans=" + Long_loans + ", net_profit=" + net_profit + ", Operating_profit=" + Operating_profit + ", Operating_cost=" + Operating_cost + ", Income_tax_paid=" + Income_tax_paid + ", AEADNGL=" + AEADNGL + ", Selling_expenses=" + Selling_expenses + ", business_tariff_and_annex=" + business_tariff_and_annex + ", CPDDP=" + CPDDP + ", NCFOA=" + NCFOA + ", Cash_from_borrow=" + Cash_from_borrow + ", CRAB=" + CRAB + ", CPFAIALA=" + CPFAIALA + ", DFAOGAPBA=" + DFAOGAPBA + ", Deferred_assets=" + Deferred_assets + ", SCOSE=" + SCOSE + ", IdC=" +this.company.getIdC()+ '}';
     }
     
 }

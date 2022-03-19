@@ -20,25 +20,22 @@ import java.util.logging.Logger;
 public class DB
 {
 
-	/*----- Connexion -----*/
+	/*----- 连接数据库 -----*/
 	private static Connection CX = null;
 
-	/*----- Données de connexion -----*/
+	/*----- 准备连接数据 -----*/
 	private static final String URL ="jdbc:mysql://localhost:3306/citi";
 	private static final String LOGIN = "root";
 	private static final String PASSWORD = "0000";
 
 
-	/*----------*/
-	/* Méthodes */
-	/*----------*/
 
 	/**
-	 * Crée la connexion avec la base de données.
+	 * 创建连接
 	 */
 	private static void connexion() throws ClassNotFoundException, SQLException
         {
-            /*----- Chargement du pilote pour la BD -----*/
+            
             try {
                     Class.forName("com.mysql.cj.jdbc.Driver");
                     }
@@ -47,7 +44,7 @@ public class DB
                     throw new ClassNotFoundException("Exception connexion() - Pilote MySql introuvable - " + ex.getMessage());
                     }
 
-            /*----- Ouverture de la connexion -----*/
+            /*----- 建立连接 -----*/
             try {
                     DB.CX = DriverManager.getConnection(URL,LOGIN,PASSWORD);
                     }
@@ -57,24 +54,23 @@ public class DB
                     }
         }
 
-
 	
 	public static List<Company> readCompanies () throws Exception
         {
             List<Company> liste = new ArrayList<>();
 
-            // Connexion
+            // 检查建立连接
             if(CX == null)
                 DB.connexion();
 
-            // Requête SQL
+            // SQL
             String sql = "SELECT * FROM Company";
 
-            // Ouverture d'un espace de requête
+            // 执行SQL
             try(PreparedStatement st = CX.prepareStatement(sql)){
                 ResultSet rs = st.executeQuery();
 
-                // Lire le résultat
+                // 读取结果 
                 while(rs.next()){
                     Company c = new Company(rs.getString("IdC"),
                                             rs.getString("EnglishName"),
@@ -106,17 +102,17 @@ public class DB
         {
             Company c = new Company();
 
-            // Connexion
+            // 检查建立连接
             if(CX == null)
                 DB.connexion();
 
-            // Requête SQL
+            // SQL
             String sql = "SELECT * FROM Company WHERE IdC = '"+IdC+"'";
-            // Ouverture d'un espace de requête
+            // 执行SQL
             try(PreparedStatement st = CX.prepareStatement(sql)){
                 ResultSet rs = st.executeQuery();
 
-                // Lire le résultat
+                // 读取结果
                 while(rs.next()){
                     c = new Company(rs.getString("IdC"),
                                     rs.getString("EnglishName"),
@@ -185,7 +181,8 @@ public class DB
                                             rs.getFloat("CPFAIALA"),
                                             rs.getFloat("DFAOGAPBA"),
                                             rs.getFloat("Deferred_assets"),
-                                            rs.getFloat("SCOSE"));
+                                            rs.getFloat("SCOSE"),
+                                            DB.findCompany(rs.getString("IdC")));
                     liste.add(f);
                 }
 
@@ -195,6 +192,58 @@ public class DB
             return liste;
         }
         
+        public static List<Finance> readFinancesByIdC (String IdC) throws Exception
+        {
+            List<Finance> liste = new ArrayList<>();
+
+            // Connexion
+            if(CX == null)
+                DB.connexion();
+
+            // Requête SQL
+            String sql = "SELECT * FROM Finance WHERE IdC='"+IdC+"'";
+
+            // Ouverture d'un espace de requête
+            try(PreparedStatement st = CX.prepareStatement(sql)){
+                ResultSet rs = st.executeQuery();
+
+                // Lire le résultat
+                while(rs.next()){
+                    Finance f = new Finance(rs.getInt("IdF"),
+                                            rs.getDate("Date"),
+                                            rs.getFloat("liabilities"),
+                                            rs.getFloat("assets"),
+                                            rs.getFloat("current_assets"),
+                                            rs.getFloat("current_liabilities"),
+                                            rs.getFloat("inventories"),
+                                            rs.getFloat("shareholders_equity"),
+                                            rs.getFloat("profits_payable"),
+                                            rs.getFloat("Short_loans"),
+                                            rs.getFloat("Long_loans"),
+                                            rs.getFloat("net_profit"),
+                                            rs.getFloat("Operating_profit"),
+                                            rs.getFloat("Operating_cost"),
+                                            rs.getFloat("Income_tax_paid"),
+                                            rs.getFloat("AEADNGL"),
+                                            rs.getFloat("Selling_expenses"),
+                                            rs.getFloat("business_tariff_and_annex"),
+                                            rs.getFloat("CPDDP"),
+                                            rs.getFloat("NCFOA"),
+                                            rs.getFloat("Cash_from_borrow"),
+                                            rs.getFloat("CRAB"),
+                                            rs.getFloat("CPFAIALA"),
+                                            rs.getFloat("DFAOGAPBA"),
+                                            rs.getFloat("Deferred_assets"),
+                                            rs.getFloat("SCOSE"),
+                                            DB.findCompany(rs.getString("IdC")));
+                    liste.add(f);
+                }
+
+            }catch(SQLException sqle){
+                throw new Exception("MessageBD.readFinancesByIdC() - "+ sqle.getMessage());
+            }
+            return liste;
+        }
         
 
 	/*----------------------------*/
@@ -204,14 +253,16 @@ public class DB
 	public static void main (String[] s)
 	{
             
-            /*List<Company> listC = new ArrayList<>();
+            /* // test readCompanies
+            List<Company> listC = new ArrayList<>();
             try {
                 listC = DB.readCompanies();
             } catch (Exception ex) {
                 Logger.getLogger(DB.class.getName()).log(Level.SEVERE, null, ex);
             }
-            for (Company c : listC) System.out.println(c);*/
+            for (Company c : listC) System.out.println(c);
             
+            // test readFinances
             List<Finance> listF = new ArrayList<>();
             try {
                 listF = DB.readFinances();
@@ -219,12 +270,22 @@ public class DB
                 Logger.getLogger(DB.class.getName()).log(Level.SEVERE, null, ex);
             }
             for (Finance f : listF) System.out.println(f);
-      
+            
+            // test findCompany
             try {  
                 System.out.println(DB.findCompany("US0378331005"));
             } catch (Exception ex) {
                 Logger.getLogger(DB.class.getName()).log(Level.SEVERE, null, ex);
+            }*/
+            
+            // test readFinancesByIdC
+            List<Finance> listF2 = new ArrayList<>();
+            try {
+                listF2 = DB.readFinancesByIdC("US2605571031");
+            } catch (Exception ex) {
+                Logger.getLogger(DB.class.getName()).log(Level.SEVERE, null, ex);
             }
+            for (Finance f : listF2) System.out.println(f);
         }
 
 } /*----- Fin de la classe Bd -----*/
