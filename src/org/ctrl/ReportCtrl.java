@@ -22,22 +22,26 @@ public class ReportCtrl extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, Exception {
         String idC = request.getParameter("idC");
+System.out.println("idC" + idC);
         int total = DB.countFinanceByIDCompany(idC);
+System.out.println("idC total: " + total);
         int nbPerPage = 20;
         int thisPage = 1;
         int nbPage = (int) total / nbPerPage + 1;
-        if (request.getQueryString().contains("page")) {
-            thisPage = Integer.valueOf(request.getParameter("page"));
-            System.out.println("page" + thisPage);
-        } else if (request.getQueryString().contains("next")) {
-            thisPage = Integer.valueOf(request.getParameter("next")) + 1;;
-            System.out.println("next" + thisPage);
-        } else if (request.getQueryString().contains("pre")) {
-            thisPage = Integer.valueOf(request.getParameter("pre")) - 1;
-            System.out.println("pre" + thisPage);
-        }
-        List<Finance> f = (List<Finance>) DB.readFinanceByID(idC, nbPerPage, thisPage);
+        System.out.println("idC" + thisPage);
+//        if (request.getQueryString().contains("page")) {
+//            thisPage = Integer.valueOf(request.getParameter("page"));
+//            System.out.println("page" + thisPage);
+//        } else if (request.getQueryString().contains("next")) {
+//            thisPage = Integer.valueOf(request.getParameter("next")) + 1;;
+//            System.out.println("next" + thisPage);
+//        } else if (request.getQueryString().contains("pre")) {
+//            thisPage = Integer.valueOf(request.getParameter("pre")) - 1;
+//            System.out.println("pre" + thisPage);
+//        } else 
+        List<Finance> f = (List<Finance>) DB.readFinanceByID(idC);
         if (f.size() > 0) {
+        System.out.println("find data" + f.size());
             RequestDispatcher rd = request.getRequestDispatcher("Report");
             request.setAttribute("finance", f);
             request.setAttribute("page", thisPage);
@@ -48,6 +52,12 @@ public class ReportCtrl extends HttpServlet {
             rd.forward(request, response);
         }
 
+//        RequestDispatcher rd = request.getRequestDispatcher("Report");
+//        request.setAttribute("page", thisPage);
+//        request.setAttribute("nbPerPage", nbPerPage);
+//        request.setAttribute("nbPage", nbPage);
+//        rd.forward(request, response);
+//        System.out.println("Go to Report");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

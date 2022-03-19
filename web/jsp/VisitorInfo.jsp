@@ -16,6 +16,9 @@
             // 获取数据
             HttpSession s = request.getSession(false);
             String idCompany = s.getAttribute("idC").toString();
+            if(request.getQueryString().contains("idC")){
+                idCompany = request.getParameter("idC");
+            }
             Company c = (Company) DB.findCompany(idCompany);
             if(c.getChineseName().isEmpty()){
                 out.println("<h2>" + c.getEnglishName() + "</h2>");       

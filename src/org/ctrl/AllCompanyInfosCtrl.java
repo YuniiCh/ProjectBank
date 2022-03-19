@@ -34,8 +34,6 @@ public class AllCompanyInfosCtrl extends HttpServlet {
         request.setAttribute("nbPerPage", nbPerPage);
         request.setAttribute("nbPage", nbPage);
         rd.forward(request, response);
-        System.out.println("Go to AllCompanyInfos");
-
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
