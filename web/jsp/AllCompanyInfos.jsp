@@ -24,7 +24,7 @@
                     "<th>Fax</th><th>Email</th><th>Website</th>"+
                     "<th>RegisteredAddress</th><th>OfficeAddress</th></tr>");
             for (Company c : liste){
-                out.println("<tr><td>" + c.getIdC() + "</td>" + 
+                out.println("<tr><td><a href=‘ReportCtrl?idC='" + c.getIdC() + ">" + c.getIdC() + "</a></td>" + 
                             "<td>" + c.getEnglishName() + "</td>" +
                             "<td>" + c.getChineseName() + "</td>" +
                             "<td>" + c.getCreateDate() + "</td>" +
@@ -46,6 +46,6 @@
         %>
         <div>${requestScope.msg_reussi}<div>
         <br/>
-        <a href="ctrlCentral?fct=acceuil"> Retour vers l'acceuil</a>
+        <a href="WelcomePageCtrl?fct"> Return home </a>
     </body>
 </html>

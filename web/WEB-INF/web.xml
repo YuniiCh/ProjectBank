@@ -37,6 +37,18 @@
         <servlet-name>ResultRapportCtrl</servlet-name>
         <servlet-class>org.ctrl.ResultRapportCtrl</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ReportCtrl</servlet-name>
+        <servlet-class>org.ctrl.ReportCtrl</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Report</servlet-name>
+        <jsp-file>/jsp/Report.jsp</jsp-file>
+    </servlet>
+    <servlet>
+        <servlet-name>NotReport</servlet-name>
+        <jsp-file>/jsp/NoReport.html</jsp-file>
+    </servlet>
     <servlet-mapping>
         <servlet-name>WelcomePageCtrl</servlet-name>
         <url-pattern>/WelcomePageCtrl</url-pattern>
@@ -72,6 +84,18 @@
     <servlet-mapping>
         <servlet-name>WelcomePage</servlet-name>
         <url-pattern>/WelcomePage</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ReportCtrl</servlet-name>
+        <url-pattern>/ReportCtrl</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Report</servlet-name>
+        <url-pattern>/Report</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>NotReport</servlet-name>
+        <url-pattern>/NotReport</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

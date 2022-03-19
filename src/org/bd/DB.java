@@ -29,7 +29,7 @@ public class DB
 	/*----- Données de connexion -----*/
 	private static final String URL ="jdbc:mysql://localhost:3306/citi";
 	private static final String LOGIN = "root";
-	private static final String PASSWORD = "0000";
+	private static final String PASSWORD = "0828cyn";
 
 
 	/*----------*/
@@ -198,7 +198,56 @@ public class DB
             return liste;
         }
         
-        
+//Find a company's financial data
+         public static Finance findFinance (String idC) throws Exception
+        {
+            // Connexion
+            if(CX == null)
+                DB.connexion();
+
+            // Requête SQL
+            String sql = "SELECT * FROM Finance WHERE idC = ";
+
+            // Ouverture d'un espace de requête
+            try(PreparedStatement st = CX.prepareStatement(sql)){
+                ResultSet rs = st.executeQuery();
+
+                // Lire le résultat
+                while(rs.next()){
+                    Finance f = new Finance(rs.getInt("IdF"),
+                                            rs.getDate("Date"),
+                                            rs.getFloat("liabilities"),
+                                            rs.getFloat("assets"),
+                                            rs.getFloat("current_assets"),
+                                            rs.getFloat("current_liabilities"),
+                                            rs.getFloat("inventories"),
+                                            rs.getFloat("shareholders_equity"),
+                                            rs.getFloat("profits_payable"),
+                                            rs.getFloat("Short_loans"),
+                                            rs.getFloat("Long_loans"),
+                                            rs.getFloat("net_profit"),
+                                            rs.getFloat("Operating_profit"),
+                                            rs.getFloat("Operating_cost"),
+                                            rs.getFloat("Income_tax_paid"),
+                                            rs.getFloat("AEADNGL"),
+                                            rs.getFloat("Selling_expenses"),
+                                            rs.getFloat("business_tariff_and_annex"),
+                                            rs.getFloat("CPDDP"),
+                                            rs.getFloat("NCFOA"),
+                                            rs.getFloat("Cash_from_borrow"),
+                                            rs.getFloat("CRAB"),
+                                            rs.getFloat("CPFAIALA"),
+                                            rs.getFloat("DFAOGAPBA"),
+                                            rs.getFloat("Deferred_assets"),
+                                            rs.getFloat("SCOSE"));
+                    return f;
+                }
+
+            }catch(SQLException sqle){
+                throw new Exception("MessageBD.readFinances() - "+ sqle.getMessage());
+            }
+            return null;
+        }
 
 	/*----------------------------*/
 	/* Programme principal (test) */
