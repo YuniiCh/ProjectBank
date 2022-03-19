@@ -12,39 +12,30 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.bd.DB;
+import org.object.Company;
 import org.object.Finance;
 
 /**
  *
  * @author CYN
  */
-public class ReportCtrl extends HttpServlet {
+public class CompanyInfoCtrl extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, Exception {
-        String idC = request.getParameter("idC");
-        int total = DB.countFinanceByIDCompany(idC);
-        int nbPerPage = 20;
-        int thisPage = 1;
-        int nbPage = (int) total / nbPerPage + 1;
-        if (request.getQueryString().contains("page")) {
-            thisPage = Integer.valueOf(request.getParameter("page"));
-            System.out.println("page" + thisPage);
-        } else if (request.getQueryString().contains("next")) {
-            thisPage = Integer.valueOf(request.getParameter("next")) + 1;;
-            System.out.println("next" + thisPage);
-        } else if (request.getQueryString().contains("pre")) {
-            thisPage = Integer.valueOf(request.getParameter("pre")) - 1;
-            System.out.println("pre" + thisPage);
-        }
-        List<Finance> f = (List<Finance>) DB.readFinanceByID(idC, nbPerPage, thisPage);
-        if (f.size() > 0) {
-            RequestDispatcher rd = request.getRequestDispatcher("Report");
-            request.setAttribute("finance", f);
-            request.setAttribute("page", thisPage);
-            request.setAttribute("nbPage", nbPage);
+if(request.getQueryString().contains("idC")){
+System.out.println("get idC: " + request.getParameter("idC"));
+}
+        String c = request.getParameter("idC");
+        String msg_avert = "";
+        System.out.println("idC" + c);
+        if (!c.isEmpty()) {
+            RequestDispatcher rd = request.getRequestDispatcher("VisitorInfo");
+            System.out.println("VisitorInfo" + c);
+            request.setAttribute("idC", c);
             rd.forward(request, response);
         } else {
-            RequestDispatcher rd = request.getRequestDispatcher("NoReport");
+            RequestDispatcher rd = request.getRequestDispatcher("AllCompanyInfos");
+            request.setAttribute("avert", msg_avert);
             rd.forward(request, response);
         }
 
@@ -96,4 +87,5 @@ public class ReportCtrl extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
 }

@@ -44,7 +44,55 @@ public class DB {
         }
     }
 
-    public static List<Company> readCompanies() throws Exception {
+    /**
+     *
+     * @return
+     */
+    public static int countCompany() throws Exception {
+        int nbCompany = 0;
+        // 检查建立连接
+        if (CX == null) {
+            DB.connexion();
+        }
+
+        // SQL
+        String sql = "SELECT count(*) FROM Company";
+
+        // 执行SQL
+        try (PreparedStatement st = CX.prepareStatement(sql)) {
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                nbCompany = rs.getInt(1);
+            }
+        } catch (SQLException sqle) {
+            throw new Exception("MessageBD.countCompany() - " + sqle.getMessage());
+        }
+        return nbCompany;
+    }
+
+    public static int countFinanceByIDCompany(String idC) throws Exception {
+        int nbFinance = 0;
+        // 检查建立连接
+        if (CX == null) {
+            DB.connexion();
+        }
+
+        // SQL
+        String sql = "SELECT count(*) FROM Finance WHERE idC =" + idC;
+
+        // 执行SQL
+        try (PreparedStatement st = CX.prepareStatement(sql)) {
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                nbFinance = rs.getInt(1);
+            }
+        } catch (SQLException sqle) {
+            throw new Exception("MessageBD.countFinanceByIDCompany() - " + sqle.getMessage());
+        }
+        return nbFinance;
+    }
+
+    public static List<Company> readCompanies(int nbPerPage, int thispage) throws Exception {
         List<Company> liste = new ArrayList<>();
 
         // 检查建立连接
@@ -53,7 +101,8 @@ public class DB {
         }
 
         // SQL
-        String sql = "SELECT * FROM Company";
+        String sql = "SELECT * FROM Company LIMIT " + (thispage - 1) * nbPerPage + ", " + nbPerPage;
+        System.out.println(sql);
 
         // 执行SQL
         try (PreparedStatement st = CX.prepareStatement(sql)) {
@@ -182,7 +231,7 @@ public class DB {
     }
 
 //Find a company's financial data
-    public static List<Finance> readFinanceByID(String idC) throws Exception {
+    public static List<Finance> readFinanceByID(String idC, int nbPerPage, int thispage) throws Exception {
         List<Finance> liste = new ArrayList<>();
         // Connexion
         if (CX == null) {
@@ -190,7 +239,7 @@ public class DB {
         }
 
         // Requête SQL
-        String sql = "SELECT * FROM Finance WHERE idC = '" + idC + "'";
+        String sql = "SELECT * FROM Finance WHERE idC = '" + idC + "' LIMIT" + (thispage - 1) * nbPerPage  + ", " + nbPerPage;
 
         // Ouverture d'un espace de requête
         try (PreparedStatement st = CX.prepareStatement(sql)) {
@@ -267,13 +316,14 @@ public class DB {
         // test readFinancesByIdC
         List<Finance> F2 = new ArrayList<>();
         try {
-            F2 = DB.readFinanceByID("US2605571031");
+            F2 = DB.readFinanceByID("US2605571031", 10, 1);
         } catch (Exception ex) {
             Logger.getLogger(DB.class.getName()).log(Level.SEVERE, null, ex);
         }
         for (Finance f : F2) {
             System.out.println(f);
         }
+
     }
 
 }

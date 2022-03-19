@@ -7,7 +7,7 @@
     <link rel="stylesheet" type="text/css" href="tt/newcss.css" />
         <title>登录页面</title>
     </head>
-    <body>
+    <body id="connectpage">
         
         <h1>公司登录</h1>
            
@@ -27,7 +27,7 @@
         %>
 
         <br/>
-        <a href="WelcomePage"> Retour vers l'acceuil</a>
+        <a id="welcome" href="WelcomePage"> Retour vers l'acceuil</a>
         
     </body>
 </html>

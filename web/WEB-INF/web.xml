@@ -46,8 +46,16 @@
         <jsp-file>/jsp/Report.jsp</jsp-file>
     </servlet>
     <servlet>
-        <servlet-name>NotReport</servlet-name>
+        <servlet-name>NoReport</servlet-name>
         <jsp-file>/jsp/NoReport.html</jsp-file>
+    </servlet>
+    <servlet>
+        <servlet-name>CompanyInfoCtrl</servlet-name>
+        <servlet-class>org.ctrl.CompanyInfoCtrl</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AllCompanyInfosCtrl</servlet-name>
+        <servlet-class>org.ctrl.AllCompanyInfosCtrl</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>WelcomePageCtrl</servlet-name>
@@ -94,8 +102,16 @@
         <url-pattern>/Report</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>NotReport</servlet-name>
-        <url-pattern>/NotReport</url-pattern>
+        <servlet-name>NoReport</servlet-name>
+        <url-pattern>/NoReport</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CompanyInfoCtrl</servlet-name>
+        <url-pattern>/CompanyInfoCtrl</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AllCompanyInfosCtrl</servlet-name>
+        <url-pattern>/AllCompanyInfosCtrl</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

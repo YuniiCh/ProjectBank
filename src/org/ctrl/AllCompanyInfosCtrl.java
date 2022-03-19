@@ -5,48 +5,36 @@
 package org.ctrl;
 
 import java.io.IOException;
-import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.bd.DB;
-import org.object.Finance;
 
 /**
  *
  * @author CYN
  */
-public class ReportCtrl extends HttpServlet {
+public class AllCompanyInfosCtrl extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, Exception {
-        String idC = request.getParameter("idC");
-        int total = DB.countFinanceByIDCompany(idC);
+        int nbCompany = DB.countCompany();
         int nbPerPage = 20;
+        int nbPage = (int) nbCompany / nbPerPage + 1;
         int thisPage = 1;
-        int nbPage = (int) total / nbPerPage + 1;
         if (request.getQueryString().contains("page")) {
             thisPage = Integer.valueOf(request.getParameter("page"));
-            System.out.println("page" + thisPage);
         } else if (request.getQueryString().contains("next")) {
-            thisPage = Integer.valueOf(request.getParameter("next")) + 1;;
-            System.out.println("next" + thisPage);
         } else if (request.getQueryString().contains("pre")) {
             thisPage = Integer.valueOf(request.getParameter("pre")) - 1;
-            System.out.println("pre" + thisPage);
         }
-        List<Finance> f = (List<Finance>) DB.readFinanceByID(idC, nbPerPage, thisPage);
-        if (f.size() > 0) {
-            RequestDispatcher rd = request.getRequestDispatcher("Report");
-            request.setAttribute("finance", f);
-            request.setAttribute("page", thisPage);
-            request.setAttribute("nbPage", nbPage);
-            rd.forward(request, response);
-        } else {
-            RequestDispatcher rd = request.getRequestDispatcher("NoReport");
-            rd.forward(request, response);
-        }
+        RequestDispatcher rd = request.getRequestDispatcher("AllCompanyInfos");
+        request.setAttribute("page", thisPage);
+        request.setAttribute("nbPerPage", nbPerPage);
+        request.setAttribute("nbPage", nbPage);
+        rd.forward(request, response);
+        System.out.println("Go to AllCompanyInfos");
 
     }
 
@@ -96,4 +84,5 @@ public class ReportCtrl extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
 }

@@ -2,17 +2,205 @@ html {
     background: white;
 }
 
+
 body{
+    /*white-space:nowrap;*/
+    background-image:url("../image/2.webp");
+    height: 800px;
+    background-repeat:no-repeat;
+    background-size:100%;
+    background-position:center top;
     font-family: Arial;
-    background-color:#D8F0F0;
+    background-color:#9BCAFD;
+    /*background-color:#D8F0F0;*/
+    text-align: center;
 }
+
+h1,h2{
+    text-align: center;
+    font-family: Comic Sans MS;
+    corlor: #5A6CD8;
+}
+form{
+    margin: 20px;
+    padding: 10px;
+    text-align: center;
+}
+input{
+    border-color: white;
+    border-radius: 12px;
+}
+table,th,td{
+    margin: auto;
+    /*background-color: #DBEDDB;*/
+    border:0.5px solid white;
+    border-color: white;
+    text-align: center;
+    font-family: Comic Sans MS;
+    font-size: 12px;
+    word-wrap: break-word;
+}
+
+#companyt{
+    margin-top: 100px;
+}
+/*
+table td{
+    white-space:pre-line;
+    word-break: break-all;
+    word-wrap: break-word;
+}*/
+
+#menu li{
+    float:left;
+    border:none;
+    border-radius: 20px;
+    color: white;
+    padding: 10px 10px;
+    width:220px;
+    height: 50px;
+    text-align:center;
+    vertical-align: middle;
+    background-color:#59D9B1;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 18px;
+    font-family: Comic Sans MS;
+    font-weight: bold;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+
+#page li{
+    float:left;
+    border:none;
+    border-radius: 20px;
+    color: white;
+    padding: 10px 10px;
+    width:40px;
+    height: 20px;
+    text-align:center;
+    vertical-align: middle;
+    background-color:#4169E1;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 10px;
+    font-family: Comic Sans MS;
+    font-weight: bold;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+
+button{
+    white-space:nowrap;
+    background-color:#4169E1;
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+a:link {
+    text-decoration: none;
+    color:white;
+    text-align: center;
+}
+a:visited {
+    text-decoration: none;
+    color:white;
+}
+a:hover {
+    text-decoration: none;
+    color:#A2FF8F;
+}
+a:active {
+    text-decoration: none;
+    color:#7D8CFB;
+}
+
+.error{
+    margin: 15px;
+    padding: 10px;
+    text-align: center;
+    color: red;
+    font-size: 14px;
+}
+#companypage{
+    background-color: #C0D8D8;
+    
+}
+#welcomepage{
+    background-image:url("image/1.jfif");
+    background-repeat:no-repeat;
+    background-size:100%;
+    height: 600px;
+    /*background-position:center top;*/
+}
+/*#connectpage{
+    background-image: url("../image/2.webp");
+    background-repeat:no-repeat;
+    background-size:100%;
+    height: 600px;
+}
+
+*/#reportpage{
+    background-image: none;
+    background-color: #C0D8D8;
+}/*
+
+#visitpage{
+    background-image: url("../image/2.webp");
+    background-repeat:no-repeat;
+    background-size:100%;
+    height: 600px;
+}*/
+
+#welcome{
+    margin: auto;
+    padding: 5px 5px;
+    border:none;
+    border-radius: 10px;
+    background-color: #339900;
+    font-weight: bold;
+}
+
+#menu{
+    pointer-events:auto;
+}
+
+#calendar{
+    white-space:nowrap;
+    display: block;
+    position: absolute;
+    margin-left:auto;
+    margin-right: auto;
+    padding-left:100px;
+    padding-right: 100px;
+    padding-bottom:100px;
+    padding-top: 120px;
+    pointer-events:none;
+}
+
+form{
+    margin: auto;
+    padding-top: 50px;
+}
+table a:hover{
+    font-size: 15px;
+}
+
+
+
 .pseudo{
-    width:280px; 
+    width:280px;
     height:30px;
 }
 
 .psw{
-    width:246px; 
+    width:246px;
     height:30px;
 }
 

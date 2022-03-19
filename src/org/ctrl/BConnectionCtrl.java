@@ -10,34 +10,32 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-@WebServlet(name = "BConnectionCtrl", urlPatterns = {"/BConnectionCtrl"})
 public class BConnectionCtrl extends HttpServlet {
 
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
-        
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
         // 获取参数
         String pseudo = request.getParameter("psd");
         String password = request.getParameter("psw");
-
+        System.out.println(pseudo);
+        System.out.println(password);
         // 测试参数
         String msg_avert = "";
-        if(pseudo.isEmpty() || pseudo == "")
+        if (pseudo.isEmpty() || pseudo == "") {
             msg_avert = "请输入用户名";
+        }
 
-        if(password.isEmpty() || password == "")
+        if (password.isEmpty() || password == "") {
             msg_avert = "请输入密码";
-
-        if(!msg_avert.isEmpty()){
-            // KO - 返回登陆页面
-            RequestDispatcher rd = request.getRequestDispatcher("BConnection");
-            request.setAttribute("avert", msg_avert);
-            rd.forward(request, response);
-
-        }else if(pseudo.equals("banker") && password.equals("0000")){
-            request.getRequestDispatcher("ReadTable").forward(request, response);
-
-        }else{
+        }
+        if (!pseudo.equals("banker") || !password.equals("0000")) {
             msg_avert = "用户名或密码不正确";
+        }
+
+        if (msg_avert.isEmpty()) {
+            // KO - 返回登陆页         
+            request.getRequestDispatcher("AllCompanyInfosCtrl").forward(request, response);
+        } else {
             RequestDispatcher rd = request.getRequestDispatcher("BConnection");
             request.setAttribute("avert", msg_avert);
             rd.forward(request, response);
