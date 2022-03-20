@@ -17,7 +17,7 @@ body{
     padding-top: 1%; 
     text-align: center;   
     font-family: Arial;
-    height: 1200px;    
+    height: 1300px;    
     opacity: 0.91;
     font-family: Arial;
     background-color:white;
@@ -26,11 +26,17 @@ body{
     text-align: center;
 }
 
+#connectpage{
+    height: 550px;
+    padding-top: 7%;
+}
+
 h1,h2{
     text-align: center;
     font-family: Comic Sans MS;
     corlor: #5A6CD8;
 }
+
 form{
     margin: 20px;
     padding: 10px;

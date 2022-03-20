@@ -142,7 +142,7 @@
                                 backgroundColor: 'white',
 
                                 title: {
-                                    text: '课程内容分布',
+                                    text: '',
                                     left: 'center',
                                     top: 20,
                                     textStyle: {
@@ -164,7 +164,7 @@
                                 },
                                 series : [
                                     {
-                                        name:'课程内容分布',
+                                        name:'',
                                         type:'pie',
                                         clockwise:'true',
                                         startAngle:'0',

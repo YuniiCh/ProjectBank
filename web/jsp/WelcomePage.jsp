@@ -80,7 +80,7 @@
     </head>
     <body id="welcomepage">
         </br>
-        <h1>Welcome To Our Bank </h1>
+        <h1>Welcome To Our Bank System</h1>
         </br>
         <h2>Please choose your role</h2>
         <div id="menu" style='position:relative;left:15%; '>

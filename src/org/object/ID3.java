@@ -30,7 +30,7 @@ public class ID3 {
     public String kind;
 
     public ID3(String[] lables, ArrayList<ArrayList<String>> train, ArrayList<ArrayList<String>> test) throws FileNotFoundException, Exception {
-//获取特征标签
+    //获取特征标签
         this.label = getFactures(lables);
         //初始化训练数据并得到分类种数
         this.date = train;
@@ -334,6 +334,7 @@ public class ID3 {
             } else if (operateProfit > avgOperateProfite) {
                 noteOperateProfit = "normal";
             }}
+            
             line.add(noteOperateProfit);
 //计算可用资本等级
             Float workeCapital = h.get("working_capital");
@@ -348,6 +349,7 @@ public class ID3 {
             line.add(noteWorkeCapital);
             finalData.add(line);
         }
+        
         return finalData;
     }
 
