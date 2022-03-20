@@ -16,14 +16,11 @@ import org.bd.DB;
 import org.object.Company;
 import org.object.Finance;
 
-/**
- *
- * @author CYN
- */
+
 public class CompanyInfoCtrl extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, Exception {
-        /*String c = request.getParameter("idC");
+        String c = request.getParameter("idC");
         String msg_avert = "";
         if (!c.isEmpty()) {
             RequestDispatcher rd = request.getRequestDispatcher("VisitorInfo");
@@ -34,7 +31,7 @@ public class CompanyInfoCtrl extends HttpServlet {
             RequestDispatcher rd = request.getRequestDispatcher("AllCompanyInfos");
             request.setAttribute("avert", msg_avert);
             rd.forward(request, response);
-        }*/
+        }
 
     }
 

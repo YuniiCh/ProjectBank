@@ -181,19 +181,18 @@ public class DB {
     public static List<Finance> readFinances() throws Exception {
         List<Finance> liste = new ArrayList<>();
 
-        // Connexion
+        // 连接
         if (CX == null) {
             DB.connexion();
         }
 
-        // Requête SQL
+        // SQL
         String sql = "SELECT * FROM Finance Order By Date";
 
-        // Ouverture d'un espace de requête
         try (PreparedStatement st = CX.prepareStatement(sql)) {
             ResultSet rs = st.executeQuery();
 
-            // Lire le résultat
+            // 读取结果
             while (rs.next()) {
                 Finance f = new Finance(rs.getInt("IdF"),
                         rs.getDate("Date"),
@@ -231,22 +230,21 @@ public class DB {
         return liste;
     }
 
-//Find a company's financial data
+    //Find a company's financial data
     public static List<Finance> readFinanceByID(String idC) throws Exception {
         List<Finance> liste = new ArrayList<>();
-        // Connexion
+        
         if (CX == null) {
             DB.connexion();
         }
 
-        // Requête SQL
+        //SQL
         String sql = "SELECT * FROM Finance WHERE idC='" + idC + "'"+"Order By Date";
 
-        // Ouverture d'un espace de requête
         try (PreparedStatement st = CX.prepareStatement(sql)) {
             ResultSet rs = st.executeQuery();
 
-            // Lire le résultat
+            // 读取结果
             while (rs.next()) {
                 Finance f = new Finance(rs.getInt("IdF"),
                         rs.getDate("Date"),
@@ -285,16 +283,16 @@ public class DB {
         return liste;
     }
 
-//Find all Data for Report by ccompany id
+    //Find all Data for Report by ccompany id
     public static HashMap<String, Float> findAvgData() throws ClassNotFoundException, SQLException, Exception {
         List<Float> liste = new ArrayList<>();
         HashMap<String, Float> data = new HashMap();
-        // Connexion
+
         if (CX == null) {
             DB.connexion();
         }
 
-        // Requête SQL
+        // SQL
         String sql = "SELECT(AVG(rate_liabi_ass)*0.1 + AVG(rate_current)*0.2+AVG(ebitda)*0.1)*0.4+(AVG(return_net_assets)+AVG(return_net_assets))*0.15*0.3+\n"
                 + "       (AVG(total_asset_turnover)*0.8+ +AVG(current_asset_turnover*0.12))*0.2 + (AVG(sale_growth_rate*0.06 ) +AVG(capital_accumule_rate*0.04))*0.1 +\n"
                 + "       (AVG(return_net_assets)*0.2+AVG(rate_sale_profit)*0.1+AVG(total_asset_turnover)*0.2+AVG(NCFOA)*0.2+AVG(net_loan_flow)*0.3)*0.5+AVG(Debt_Service_Coverage_Ratio) AS avgCredit,\n"
@@ -343,11 +341,10 @@ public class DB {
 "    ) t2 on t1.IdC=t2.IdC\n" +
 ") t4 on t3.IdC = t4.IdC";
 
-        // Ouverture d'un espace de requête
         try (PreparedStatement st = CX.prepareStatement(sql)) {
             ResultSet rs = st.executeQuery();
 
-            // Lire le résultat
+            // 读取结果
 //            while (rs.next()) {
 //                liste.add(rs.getFloat("age"));
 //                liste.add(rs.getFloat("return_net_assets"));
@@ -380,17 +377,17 @@ public class DB {
         return data;
     }
 
-//Find all Data for Report by ccompany id
+    //Find all Data for Report by ccompany id
     public static HashMap<String, HashMap<String, Float>> findData() throws ClassNotFoundException, SQLException, Exception {
         HashMap<String, HashMap<String, Float>> datas = new HashMap<>();
         List<Float> liste = new ArrayList<>();
         HashMap<String, Float> data = new HashMap();
-        // Connexion
+
         if (CX == null) {
             DB.connexion();
         }
 
-        // Requête SQL
+        // SQL
         String sql = "SELECT t3.IdC,(rate_liabi_ass*0.1+rate_current* 0.2 + ebitda*0.1)*0.4 + (return_net_assets+ return_net_assets)*0.15*0.3 +\n" +
 "       (total_asset_turnover*0.8+current_asset_turnover*0.12)*0.2+(sale_growth_rate*0.06 + capital_accumule_rate*0.04)*0.1 +\n" +
 "       (return_net_assets*0.2+rate_sale_profit*0.1+total_asset_turnover*0.2+NCFOA*0.2+net_loan_flow*0.3)*0.5 + Debt_Service_Coverage_Ratio AS credit,\n" +
@@ -438,11 +435,11 @@ public class DB {
 ") t4 on t3.IdC = t4.IdC;";
         
 
-        // Ouverture d'un espace de requête
+
         try (PreparedStatement st = CX.prepareStatement(sql)) {
             ResultSet rs = st.executeQuery();
 
-            // Lire le résultat
+            // 读取结果
             while (rs.next()) {
                 data.put("credit", rs.getFloat("credit"));
                 data.put("age", rs.getFloat("age"));
@@ -460,8 +457,8 @@ public class DB {
     }
 
     /*----------------------------*/
- /* Programme principal (test) */
- /*----------------------------*/
+    /* DB测试主程序 */
+    /*----------------------------*/
     public static void main(String[] s) {
 
         /* // test readCompanies
@@ -498,7 +495,7 @@ public class DB {
 //        for (Finance f : F2) {
 //            System.out.println(f);
 //        }
-//test data
+        //test data
         /*HashMap<String, Float> data = new HashMap<>();
         try {
             data = DB.findAvgData();

@@ -195,8 +195,8 @@
 				},
 			}
 			myChart1.setOption(option);
-		})-->
-	</script>
+		
+	</script>})-->
         
         <div id="recommend">
             

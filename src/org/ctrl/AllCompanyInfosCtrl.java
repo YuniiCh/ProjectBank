@@ -12,10 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.bd.DB;
 
-/**
- *
- * @author CYN
- */
+
 public class AllCompanyInfosCtrl extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, Exception {

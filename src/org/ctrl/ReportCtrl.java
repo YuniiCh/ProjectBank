@@ -14,10 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.bd.DB;
 import org.object.Finance;
 
-/**
- *
- * @author CYN
- */
+
 public class ReportCtrl extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, Exception {
