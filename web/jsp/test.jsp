@@ -19,16 +19,17 @@
     <body>
         <h1>Hello World!</h1>
         <%
-            HashMap<String, HashMap<String,Float>> data = new HashMap<>();
+            HashMap<String, HashMap<String,Float>> datas = new HashMap<>();
             try{
-                data = DB.findData();
-                for (HashMap<String,Float> fl: data.values()) {
+                datas = DB.findData();
+                out.println("got it");
+                for (HashMap<String,Float> fl: datas.values()) {
                 for (float f : fl.values()) {
                     out.println(f);
                 }
              }
             }catch (Exception ex) {
-                Logger.getLogger(DB.class.getName()).log(Level.SEVERE, null, ex);
+                throw new Exception("MessageBD.findData() - " + ex.getMessage());               
             }
 
 

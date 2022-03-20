@@ -23,11 +23,11 @@ import org.bd.DB;
  */
 public class ID3 {
 
-    private List<String> label = new ArrayList<String>();//特征标签
-    private ArrayList<ArrayList<String>> date = new ArrayList<ArrayList<String>>();//数据集
-    private ArrayList<ArrayList<String>> test = new ArrayList<ArrayList<String>>();//测试数据集
-    private ArrayList<String> sum = new ArrayList<String>();//分类种类数
-    private String kind;
+    public List<String> label = new ArrayList<String>();//特征标签
+    public ArrayList<ArrayList<String>> date = new ArrayList<ArrayList<String>>();//数据集
+    public ArrayList<ArrayList<String>> test = new ArrayList<ArrayList<String>>();//测试数据集
+    public ArrayList<String> sum = new ArrayList<String>();//分类种类数
+    public String kind;
 
     public ID3(String[] lables, ArrayList<ArrayList<String>> train, ArrayList<ArrayList<String>> test) throws FileNotFoundException, Exception {
 //获取特征标签
@@ -308,7 +308,7 @@ public class ID3 {
             } else if (noteLife >= 4) {
                 life = "mature";
             }
-            line.add("life");
+            line.add(life);
 
 //计算应收账款等级
             Float accountReceivable = h.get("account_receivable");
@@ -319,6 +319,7 @@ public class ID3 {
             } else if (accountReceivable > avgAccountReceivable) {
                 noteAccountReceivable = "normal";
             }
+            line.add(noteAccountReceivable);
 
 //计算营业收入等级
             Float operateProfit = h.get("operating_profit");
@@ -329,6 +330,7 @@ public class ID3 {
             } else if (operateProfit > avgOperateProfite) {
                 noteOperateProfit = "normal";
             }
+            line.add(noteOperateProfit);
 //计算可用资本等级
             Float workeCapital = h.get("working_capital");
             Float avgWorkeCapital = avgData.get("working_capital");
@@ -338,7 +340,7 @@ public class ID3 {
             } else if (workeCapital > avgWorkeCapital) {
                 noteWorkeCapital = "normal";
             }
-
+            line.add(noteWorkeCapital);
             finalData.add(line);
         }
         return finalData;

@@ -61,6 +61,10 @@
         <servlet-name>GetAssetsData</servlet-name>
         <servlet-class>org.ctrl.GetAssetsData</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>test</servlet-name>
+        <jsp-file>/jsp/test.jsp</jsp-file>
+    </servlet>
     <servlet-mapping>
         <servlet-name>WelcomePageCtrl</servlet-name>
         <url-pattern>/WelcomePageCtrl</url-pattern>
@@ -120,6 +124,10 @@
     <servlet-mapping>
         <servlet-name>GetAssetsData</servlet-name>
         <url-pattern>/GetAssetsData</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>test</servlet-name>
+        <url-pattern>/test</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
