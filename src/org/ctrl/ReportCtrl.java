@@ -46,6 +46,7 @@ System.out.println("idC total: " + total);
             request.setAttribute("finance", f);
             request.setAttribute("page", thisPage);
             request.setAttribute("nbPage", nbPage);
+            request.setAttribute("idC", idC);
             rd.forward(request, response);
         } else {
             RequestDispatcher rd = request.getRequestDispatcher("NoReport");

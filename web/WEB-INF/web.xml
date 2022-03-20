@@ -34,10 +34,6 @@
         <jsp-file>/jsp/VisitorInfo.jsp</jsp-file>
     </servlet>
     <servlet>
-        <servlet-name>ResultRapportCtrl</servlet-name>
-        <servlet-class>org.ctrl.ResultRapportCtrl</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>ReportCtrl</servlet-name>
         <servlet-class>org.ctrl.ReportCtrl</servlet-class>
     </servlet>
@@ -47,7 +43,7 @@
     </servlet>
     <servlet>
         <servlet-name>NoReport</servlet-name>
-        <jsp-file>/jsp/NoReport.html</jsp-file>
+        <jsp-file>/jsp/NoReport.jsp</jsp-file>
     </servlet>
     <servlet>
         <servlet-name>CompanyInfoCtrl</servlet-name>
@@ -56,6 +52,14 @@
     <servlet>
         <servlet-name>AllCompanyInfosCtrl</servlet-name>
         <servlet-class>org.ctrl.AllCompanyInfosCtrl</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GetOperatingCostData</servlet-name>
+        <servlet-class>org.ctrl.getOperatingCostData</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GetAssetsData</servlet-name>
+        <servlet-class>org.ctrl.GetAssetsData</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>WelcomePageCtrl</servlet-name>
@@ -80,10 +84,6 @@
     <servlet-mapping>
         <servlet-name>VisitorInfo</servlet-name>
         <url-pattern>/VisitorInfo</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>ResultRapportCtrl</servlet-name>
-        <url-pattern>/ResultRapportCtrl</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>AllCompanyInfos</servlet-name>
@@ -112,6 +112,14 @@
     <servlet-mapping>
         <servlet-name>AllCompanyInfosCtrl</servlet-name>
         <url-pattern>/AllCompanyInfosCtrl</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetOperatingCostData</servlet-name>
+        <url-pattern>/GetOperatingCostData</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetAssetsData</servlet-name>
+        <url-pattern>/GetAssetsData</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
