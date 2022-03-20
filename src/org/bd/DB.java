@@ -24,7 +24,7 @@ public class DB {
     /*----- 准备连接数据 -----*/
     private static final String URL = "jdbc:mysql://localhost:3306/citi";
     private static final String LOGIN = "root";
-    private static final String PASSWORD = "0828cyn";
+    private static final String PASSWORD = "0000";
 
     /**
      * 创建连接
@@ -187,7 +187,7 @@ public class DB {
         }
 
         // Requête SQL
-        String sql = "SELECT * FROM Finance";
+        String sql = "SELECT * FROM Finance Order By Date";
 
         // Ouverture d'un espace de requête
         try (PreparedStatement st = CX.prepareStatement(sql)) {
@@ -240,7 +240,7 @@ public class DB {
         }
 
         // Requête SQL
-        String sql = "SELECT * FROM Finance WHERE idC='" + idC + "'";
+        String sql = "SELECT * FROM Finance WHERE idC='" + idC + "'"+"Order By Date";
 
         // Ouverture d'un espace de requête
         try (PreparedStatement st = CX.prepareStatement(sql)) {
@@ -280,7 +280,7 @@ public class DB {
             }
 
         } catch (SQLException sqle) {
-            throw new Exception("MessageBD.readFinances() - " + sqle.getMessage());
+            throw new Exception("MessageBD.readFinancesByID() - " + sqle.getMessage());
         }
         return liste;
     }

@@ -19,8 +19,8 @@
                 const dayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
                 let newDate = new Date();
                 document.write("<TABLE BORDER='0' CELLSPACING='0' CELLPADDING='2' BGCOLOR='#F0D8A8'>")
-                document.write("<TR><TD><table border='0' cellspacing='1' cellpadding='2' bgcolor='#FFF0A8'>");
-                document.write("<TR><th colspan='7' bgcolor='#D8D8C0'>");
+                document.write("<TR><TD><table border='0' cellspacing='1' cellpadding='2' bgcolor='#DDDDDD'>");
+                document.write("<TR><th colspan='7' bgcolor='#001f3f'>");
                 document.writeln("<FONT STYLE='font-size:9pt;Color:#484848'>" + "We are " + newDate.getDate() + "/" + (newDate.getMonth() + 1) + "/" + (newDate.getYear() + 1900) + " " + dayNames[newDate.getDay()] + "</FONT>");
                 document.writeln("</TH></TR><TR><TH BGCOLOR='#A8C0D8'><FONT STYLE='font-size:9pt;Color:White'>Dimanche</FONT></TH>");
                 document.writeln("<th bgcolor='#A8C0D8'><FONT STYLE='font-size:9pt;Color:White'>Lundi</FONT></TH>");
@@ -40,7 +40,7 @@
                     if (i == thisDay) {
                         document.writeln("</TD><TD ALIGN='CENTER'><FONT STYLE='font-size:9pt;Color:#ff0000'><B>")
                     } else {
-                        document.writeln("</TD><TD BGCOLOR='#FFF0A8' ALIGN='CENTER'><FONT STYLE='font-size:9pt;font-family:Arial;font-weight:bold;Color:#484848'>");
+                        document.writeln("</TD><TD BGCOLOR='#7FDBFF' ALIGN='CENTER'><FONT STYLE='font-size:9pt;font-family:Arial;font-weight:bold;Color:#484848'>");
                     }
                     document.writeln(i);
                     if (i == thisDay)
@@ -51,7 +51,7 @@
                         column = 0;
                     }
                 }
-                document.writeln("<TR><TD COLSPAN='7' ALIGN='CENTER' VALIGN='TOP' BGCOLOR='#D8D8C0'>")
+                document.writeln("<TR><TD COLSPAN='7' ALIGN='CENTER' VALIGN='TOP' BGCOLOR='#001f3f'>")
                 document.writeln("<FORM NAME='time' onSubmit='0'><FONT STYLE='font-size:9pt;Color:#484848'>")
                 document.writeln("<INPUT TYPE='Text' NAME='textbox' ALIGN='TOP'></FONT></TD></TR></TABLE>")
                 document.writeln("</TD></TR></TABLE></FORM>");
@@ -76,18 +76,22 @@
                 showtime();
             }
         </SCRIPT>
-        <link href="css/j.css" rel="stylesheet" type="text/css"/>
+        <link href="css/jsp.css" rel="stylesheet" type="text/css"/>
     </head>
-    <body id="welcomepage" style='background-image: url("image/1.jfif")'>
-        <h1>Welcome</h1>
-        <div id="menu">
+    <body id="welcomepage">
+        </br>
+        <h1>Welcome To Our Bank </h1>
+        </br>
+        <h2>Please choose your role</h2>
+        <div id="menu" style='position:relative;left:15%; '>
+            
             <ul>
                 <li><a href="WelcomePageCtrl?fct=banker">Banker</a></li>
                 <li><a href="WelcomePageCtrl?fct=visitor">Visitor</a></li>
             </ul>
 
         </div>
-        <div id="calendar">
+        <div id="calendar" style='position:relative;left:0%; '>
             <SCRIPT LANGUAGE="JavaScript">
                 calendar();
                 starttime();

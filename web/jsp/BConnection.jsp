@@ -4,7 +4,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link href="css/j.css" rel="stylesheet" type="text/css"/>
+        <link href="css/jsp.css" rel="stylesheet" type="text/css"/>
         <title>登录页面</title>
     </head>
     <body id="connectpage" >
@@ -12,8 +12,10 @@
            
         <form action="BConnectionCtrl"
               methode="GET">
-            <label for="user">Pseudo</label> <input class="pseudo" type="text" name="psd" value="banker"/><br>
-            <label for="psw">Password </label><input class="psw" type="text" name="psw" value="0000"/><br>            
+            <label for="user">Pseudo</label> <input class="pseudo" type="text" name="psd" value="banker"/>
+            </p>
+            <label for="psw">Password </label><input class="psw" type="text" name="psw" value="0000"/>
+            </p>            
             <input class="sb" type="submit" value="Connect"/>
         </form>
         

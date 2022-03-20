@@ -197,7 +197,7 @@ public class ID3 {
         }
     }
     //用于对待决策数据进行预测并将结果保存在指定路径
-String path="E:\\Informatique_dossier\\花旗商赛\\result.txt";
+
     public void testdate(ArrayList<ArrayList<String>> test, String path) throws IOException {
         TreeNode node = null;
         int count = 0;
@@ -349,8 +349,6 @@ String path="E:\\Informatique_dossier\\花旗商赛\\result.txt";
         int nbTrainData = 75;
         int nb = 0;
         ArrayList<ArrayList<String>> data = dealCacul();
-//HashMap<String, List<Float>> trainData = new HashMap<>();
-//HashMap<String, List<Float>> testData = new HashMap<>();
         ArrayList<ArrayList<String>> trainData = new ArrayList<>();
         ArrayList<ArrayList<String>> testData = new ArrayList<>();
         for (ArrayList<String> l : data) {
@@ -364,9 +362,9 @@ String path="E:\\Informatique_dossier\\花旗商赛\\result.txt";
 
 //		String data="C:\\Users\\zfw\\Desktop\\data1.txt";//训练数据集
 //		String test="C:\\Users\\zfw\\Desktop\\test.txt";//测试数据集
-//		String result="C:\\Users\\zfw\\Desktop\\result.txt";//预测结果集
+        String result = "E:\\Informatique_dossier\\花旗商赛\\result.txt";//预测结果集
         ID3 id = new ID3(label, trainData, testData);//初始化数据
         id.print(id.date);//构建并输出决策树
-        //id.testdate(id.test,result);//预测数据并输出结果
+        id.testdate(id.test, result);//预测数据并输出结果
     }
 }

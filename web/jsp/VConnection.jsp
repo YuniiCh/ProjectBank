@@ -4,7 +4,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <link rel="stylesheet" type="text/css" href="tt/newcss.css" />
+        <link rel="stylesheet" href="css/jsp.css" type="text/css" />
         <title>登录页面</title>
     </head>
     <body id="connectpage">

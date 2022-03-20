@@ -7,12 +7,12 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link rel="stylesheet" href="css/j.css" type="text/css" />
+        <link rel="stylesheet" href="css/jsp.css" type="text/css" />
         <title>获取数据</title>
     </head>
     <body id="companypage">
         <h1>获取数据</h1>
-        <table id="companyt" border="1">
+        <table id="companyt" border="2">
         <%
             int thisPage = (int) request.getAttribute("page");
             int nbPerPage = (int) request.getAttribute("nbPerPage");
@@ -21,18 +21,18 @@
             List<Company> liste = (List<Company>) DB.readCompanies(nbPerPage, thisPage);
 
             // Lecture de la liste et affichage
-            out.println("<tr><th>Number</th><th>Company Id</th><th>EnglishName</th>"
-                    + "<th>ChineseName</th><th>SecurityCode</th>"
-                    + "<th>SecurityType</th><th>ListingExchange</th>"
+            // <th>Number</th>
+            out.println("<tr><th>Company Id</th><th>EnglishName</th>"
+                    + "<th>ChineseName</th><th>SecurityCode</th><th>SecurityType</th>"
                     + "<th>Chairman</th><th>Employees</th><th>Website</th><th>Detail</th></tr>");
+            
             for (Company c : liste) {
-                out.println("<tr><td>" + (num++) + "</td>"
-                        + "<td><a id='idcompany' href='ReportCtrl?idC=" + c.getIdC() + "'>" + c.getIdC() + "</a></td>"
+                // <td>" + (num++) + "</td>"
+                out.println("<tr><td><a id='idcompany' href='ReportCtrl?idC=" + c.getIdC() + "'>"+ c.getIdC() + "</a></td>"
                         + "<td>" + c.getEnglishName() + "</td>"
                         + "<td>" + c.getChineseName() + "</td>"
                         + "<td>" + c.getSecurityCode() + "</td>"
                         + "<td>" + c.getSecurityType() + "</td>"
-                        + "<td>" + c.getListingExchange() + "</td>"
                         + "<td>" + c.getChairman() + "</td>"
                         + "<td>" + c.getEmployees() + "</td>"
                         + "<td>" + c.getWebsite() + "</td>"
@@ -77,8 +77,8 @@
                 if (avert != null)
                     out.println("<div class=\"avertissement\">" + avert + "</div>");
             %>
-            <div>
-                <br/>
-                <a id="welcome" href="WelcomePageCtrl?fct"> Return home </a>
-                </body>
-                </html>
+        <div>
+        <br/>
+        <a id="welcome" href="WelcomePageCtrl?fct"> Return home </a>
+    </body>
+</html>

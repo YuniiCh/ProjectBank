@@ -1,18 +1,28 @@
 html {
     background: white;
+    background-image:url("../image/5.jpg");
+    margin: 0px; padding: 0px; text-align: center;
+    background-repeat:repeat;
+    background-size:120%;
+    background-position:center top;
+    height: 800px; 
 }
 
 
 body{
     /*white-space:nowrap;*/
-    background-image:url("../image/2.webp");
-    height: 800px;
-    background-repeat:no-repeat;
-    background-size:100%;
-    background-position:center top;
+    margin-left: 10%; 
+    margin-right: 10%; 
+    margin-top: 5%;
+    padding-top: 1%; 
+    text-align: center;   
     font-family: Arial;
-    background-color:#9BCAFD;
-    /*background-color:#D8F0F0;*/
+    height: 1200px;    
+    opacity: 0.91;
+    font-family: Arial;
+    background-color:white;
+    /*background-color:#9BCAFD;
+    background-color:#D8F0F0;*/
     text-align: center;
 }
 
@@ -34,7 +44,7 @@ table,th,td{
     margin: auto;
     /*background-color: #DBEDDB;*/
     border:0.5px solid white;
-    border-color: white;
+    border-color: #0074D9;
     text-align: center;
     font-family: Comic Sans MS;
     font-size: 12px;
@@ -42,7 +52,7 @@ table,th,td{
 }
 
 #companyt{
-    margin-top: 100px;
+    margin-top: 3%;
 }
 /*
 table td{
@@ -61,16 +71,19 @@ table td{
     height: 50px;
     text-align:center;
     vertical-align: middle;
-    background-color:#59D9B1;
+    background-color:#0074D9;
     text-decoration: none;
     display: inline-block;
     font-size: 18px;
     font-family: Comic Sans MS;
     font-weight: bold;
-    margin: 4px 2px;
+    margin: 4px 30px;
     cursor: pointer;
 }
 
+#page{
+    margin-left: 10%;
+}
 #page li{
     float:left;
     border:none;
@@ -81,13 +94,13 @@ table td{
     height: 20px;
     text-align:center;
     vertical-align: middle;
-    background-color:#4169E1;
+    background-color:#0074D9;
     text-decoration: none;
     display: inline-block;
     font-size: 10px;
     font-family: Comic Sans MS;
     font-weight: bold;
-    margin: 4px 2px;
+    margin: 2% 0.3%;
     cursor: pointer;
 }
 
@@ -105,16 +118,16 @@ button{
 
 a:link {
     text-decoration: none;
-    color:white;
+    color:#0074D9;
     text-align: center;
 }
 a:visited {
     text-decoration: none;
-    color:white;
+    color:#001f3f;
 }
 a:hover {
     text-decoration: none;
-    color:#A2FF8F;
+    color:#7FDBFF;
 }
 a:active {
     text-decoration: none;
@@ -129,14 +142,16 @@ a:active {
     font-size: 14px;
 }
 #companypage{
-    background-color: #C0D8D8;
+    /*background-color: #C0D8D8;*/
+    width: 1500px;
+    height: 800px;
     
 }
 #welcomepage{
-    background-image:url("image/1.jfif");
+    /*background-image:url("image/1.jfif");*/
     background-repeat:no-repeat;
     background-size:100%;
-    height: 600px;
+    height: 700px;
     /*background-position:center top;*/
 }
 /*#connectpage{
@@ -145,12 +160,27 @@ a:active {
     background-size:100%;
     height: 600px;
 }
+*/
+#reportpage{
+    width: 2200px;
+    height: 1500px;
+    
+}
 
-*/#reportpage{
-    background-image: none;
-    background-color: #C0D8D8;
-}/*
+#report{
+    margin: 1%;
+}
 
+#opChart{
+    margin-top: 2%;
+    padding-left:3%; 
+}
+
+#recommend{
+    
+
+}
+/*
 #visitpage{
     background-image: url("../image/2.webp");
     background-repeat:no-repeat;
@@ -163,7 +193,7 @@ a:active {
     padding: 5px 5px;
     border:none;
     border-radius: 10px;
-    background-color: #339900;
+    /*background-color: #339900;*/
     font-weight: bold;
 }
 
@@ -175,6 +205,7 @@ a:active {
     white-space:nowrap;
     display: block;
     position: absolute;
+    margin-top: 3%;
     margin-left:auto;
     margin-right: auto;
     padding-left:100px;
@@ -193,19 +224,20 @@ table a:hover{
 }
 
 
-
 .pseudo{
     width:280px;
     height:30px;
+    margin: 1%;
 }
 
 .psw{
-    width:246px;
+    width:280px;
     height:30px;
+    margin: 0.7%;
 }
 
 .sb{
-    background-color:#4169E1;
+    background-color:#0074D9;
     border: none;
     color: white;
     padding: 10px 20px;

@@ -1,8 +1,3 @@
-<%-- 
-    Document   : Report
-    Created on : 2022-3-19, 0:43:01
-    Author     : CYN
---%>
 
 <%@page import="java.util.List"%>
 <%@page import="org.bd.DB"%>
@@ -12,10 +7,15 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link href="css/j.css" rel="stylesheet" type="text/css"/>
-        <title>报告</title>
+        <link rel="stylesheet" href="css/jsp.css" type="text/css" />
+        <!-- 引入 ECharts 文件 -->
+        <script src="js/echarts.js"></script>
+        <script type="text/javascript"
+                src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <title>报表</title>
     </head>
     <body id="reportpage" >
+        <div id="report">
         <%
             // 获取报告数据
             List<Finance> list_finance = (List<Finance>) request.getAttribute("finance");
@@ -58,32 +58,152 @@
                         + "<td>" + f.getSCOSE() + "</td></tr>");
             }
             out.println("</table>");
-        %>      
-        <!--翻页-->
-        <div>
-            <%
-                int thisPage =  (int) request.getAttribute("page");
-                int nbPage = (int) request.getAttribute("nbPage");
-                out.println("<ul>");
-                if (thisPage != 1) {
-                    out.println("<a href='AllCompanyInfosCtrl?page=1'><li id='pre'>首页</li></a>");
-                    out.println("<a href='AllCompanyInfosCtrl?pre=" + thisPage + "'><li id='pre'>前页</li></a>");
-                }
-                for (int i = 1; i <= nbPage; i++) {
-                    if (i == thisPage) {
-                        out.println("<li style='background-color:gray;'>" + i + "</li>");
-                    } else {
-                        out.println("<a href='AllCompanyInfosCtrl?page=" + i + "'><li>" + i + "</li></a>");
-                    }
-                }
-                if (thisPage != nbPage) {
-                    out.println("<a href='AllCompanyInfosCtrl?next=" + thisPage + "'><li id='next'>后页</li></a></ul>");
-                    out.println("<a href='AllCompanyInfosCtrl?page=" + nbPage + "'><li id='pre'>末页</li></a>");
-                }               
-            %>
+        %> 
+        </div>     
+        
+        <!-- 为 ECharts 准备一个具备大小（宽高）的 DOM -->
+	<div id="opChart" style="width: 600px; height: 400px;"></div>
+	<script type="text/javascript">
+		// 基于准备好的dom，初始化echarts实例
+		var myChart = echarts.init(document.getElementById('opChart'));
+		var url = '${pageContext.request.contextPath}/GetOperatingCostData?idC='+'<%= request.getAttribute("idC").toString()%>';
+                console.log(url);
+		$.getJSON(url).done(function(json) {
+			// 2.获取数据
+			operatingProfits = json.operatingProfits;//营业收入
+                        operatingCosts = json.operatingCosts
+			dates = json.dates;//月份
+ 
+			// 3.更新图表myChart的数据
+			var option = {
+				title : {
+					text : '营业情况趋势图'
+				},
+				tooltip : {},
+				legend : {
+					data : [ '营业收入','营业花费' ]
+				},
+				xAxis : {
+                                        name : '时间',
+					data : dates
+				},
+				yAxis : {
+                                        name : '单位:万元'   
+                                },
+				series : [{
+					name : '营业收入',
+					type : 'line',
+					data : operatingProfits},
+                                        {
+					name : '营业花费',
+					type : 'line',
+					data : operatingCosts}],
+				toolbox : {
+					show : true,
+					feature : {
+						mark : {
+							show : true
+						},
+						dataView : {
+							show : true,
+							readOnly : false
+						},
+						magicType : {
+							show : true,
+							type : [ 'line','line' ]
+						},
+						restore : {
+							show : true
+						},
+						saveAsImage : {
+							show : true
+						}
+					}
+				},
+			}
+			myChart.setOption(option);
+		})
+	</script>
+        
+        <!--<div id="pieChart" style="width: 300px; height: 400px;"></div>
+	<script type="text/javascript">
+		// 基于准备好的dom，初始化echarts实例
+		var myChart1 = echarts.init(document.getElementById('pieChart'));
+		var url = '${pageContext.request.contextPath}/GetAssetsData?idC='+'<%= request.getAttribute("idC").toString()%>';
+                console.log(url);
+		$.getJSON(url).done(function(json) {
+			// 2.获取数据
+			operatingProfits = json.operatingProfits;//营业收入
+                        operatingCosts = json.operatingCosts
+			dates = json.dates;//月份
+ 
+			// 3.更新图表myChart的数据
+			var option1 = {
+                                backgroundColor: 'white',
+
+                                title: {
+                                    text: '课程内容分布',
+                                    left: 'center',
+                                    top: 20,
+                                    textStyle: {
+                                        color: '#ccc'
+                                    }
+                                },
+                                tooltip : {
+                                    trigger: 'item',
+                                    formatter: "{a} <br/>{b} : {d}%"
+                                },
+
+                                visualMap: {
+                                    show: false,
+                                    min: 500,
+                                    max: 600,
+                                    inRange: {
+                                        colorLightness: [0, 1]
+                                    }
+                                },
+                                series : [
+                                    {
+                                        name:'课程内容分布',
+                                        type:'pie',
+                                        clockwise:'true',
+                                        startAngle:'0',
+                                        radius : '60%',
+                                        center: ['50%', '50%'],
+                                        data: operatingCosts}],
+				toolbox : {
+					show : true,
+					feature : {
+						mark : {
+							show : true
+						},
+						dataView : {
+							show : true,
+							readOnly : false
+						},
+						magicType : {
+							show : true,
+							type : [ 'line','line' ]
+						},
+						restore : {
+							show : true
+						},
+						saveAsImage : {
+							show : true
+						}
+					}
+				},
+			}
+			myChart1.setOption(option);
+		})-->
+	</script>
+        
+        <div id="recommend">
+            
         </div>
-        <div>${requestScope.avert}<div>
-                <br/>
-                <a id="welcome" href="WelcomePageCtrl?fct"> Return home </a>
-                </body>
-                </html>
+        
+        <div>${requestScope.avert}</div>
+        <br/>
+        <a id="welcome" href="WelcomePageCtrl?fct"> Return home </a>
+    </body>
+    </html>
