@@ -299,8 +299,8 @@ public class DB {
                 + "       (AVG(total_asset_turnover)*0.8+ +AVG(current_asset_turnover*0.12))*0.2 + (AVG(sale_growth_rate*0.06 ) +AVG(capital_accumule_rate*0.04))*0.1 +\n"
                 + "       (AVG(return_net_assets)*0.2+AVG(rate_sale_profit)*0.1+AVG(total_asset_turnover)*0.2+AVG(NCFOA)*0.2+AVG(net_loan_flow)*0.3)*0.5+AVG(Debt_Service_Coverage_Ratio) AS avgCredit,\n"
                 + "       AVG(sale_growth_rate) AS sale_growth_rate,AVG(cp_ratio) AS cp_ratio, AVG(age) AS age, AVG(marketing_expense_ratio) AS marketing_expense_ratio,"
-                + " AVG(t.account_receivable) as account_receivable,"
-                + " AVG(t.operating_profit) AS operating_profit,AVG(t.working_capital) AS t.working_capital\n"
+                + " AVG(account_receivable) as account_receivable,"
+                + " AVG(operating_profit) AS operating_profit,AVG(working_capital) AS working_capital\n"
                 + "FROM(\n" +
 "        SELECT IdC, ROUND(DATEDIFF(CURRENT_DATE, CreateDate)/365) AS age FROM company WHERE CreateDate IS NOT NULL\n" +
 "    ) t3 right join (\n" +
@@ -341,7 +341,7 @@ public class DB {
 "        GROUP BY f2.IdC\n" +
 "        ORDER BY f2.IdC ASC\n" +
 "    ) t2 on t1.IdC=t2.IdC\n" +
-") t4 on t3.IdC = t4.Id";
+") t4 on t3.IdC = t4.IdC";
 
         // Ouverture d'un espace de requête
         try (PreparedStatement st = CX.prepareStatement(sql)) {
@@ -375,7 +375,7 @@ public class DB {
             }
 
         } catch (SQLException sqle) {
-            throw new Exception("MessageBD.findData() - " + sqle.getMessage());
+            throw new Exception("MessageBD.findAvgData() - " + sqle.getMessage());
         }
         return data;
     }
@@ -391,7 +391,7 @@ public class DB {
         }
 
         // Requête SQL
-        String sql = "SELECT (rate_liabi_ass*0.1+rate_current* 0.2 + ebitda*0.1)*0.4 + (return_net_assets+ return_net_assets)*0.15*0.3 +\n" +
+        String sql = "SELECT t3.IdC,(rate_liabi_ass*0.1+rate_current* 0.2 + ebitda*0.1)*0.4 + (return_net_assets+ return_net_assets)*0.15*0.3 +\n" +
 "       (total_asset_turnover*0.8+current_asset_turnover*0.12)*0.2+(sale_growth_rate*0.06 + capital_accumule_rate*0.04)*0.1 +\n" +
 "       (return_net_assets*0.2+rate_sale_profit*0.1+total_asset_turnover*0.2+NCFOA*0.2+net_loan_flow*0.3)*0.5 + Debt_Service_Coverage_Ratio AS credit,\n" +
 "       sale_growth_rate,cp_ratio, age, marketing_expense_ratio, account_receivable,operating_profit,working_capital\n" +
@@ -436,6 +436,7 @@ public class DB {
 "        ORDER BY f2.IdC ASC\n" +
 "    ) t2 on t1.IdC=t2.IdC\n" +
 ") t4 on t3.IdC = t4.IdC;";
+        
 
         // Ouverture d'un espace de requête
         try (PreparedStatement st = CX.prepareStatement(sql)) {
@@ -449,7 +450,7 @@ public class DB {
                 data.put("marketing_expense_ratio", rs.getFloat("marketing_expense_ratio"));
                 data.put("cp_ratio", rs.getFloat("cp_ratio"));
 
-                datas.put(rs.getString("t3.IdC"), data);
+                datas.put(rs.getString("IdC"), data);
             }
 
         } catch (SQLException sqle) {
@@ -498,7 +499,7 @@ public class DB {
 //            System.out.println(f);
 //        }
 //test data
-        HashMap<String, Float> data = new HashMap<>();
+        /*HashMap<String, Float> data = new HashMap<>();
         try {
             data = DB.findAvgData();
             for (float fl : data.values()) {
@@ -506,8 +507,17 @@ public class DB {
             }
         } catch (Exception ex) {
             Logger.getLogger(DB.class.getName()).log(Level.SEVERE, null, ex);
+        }*/
+        
+        HashMap<String, HashMap<String, Float>> data1 = new HashMap<>();
+        try {
+            data1 = DB.findData();
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(DB.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(DB.class.getName()).log(Level.SEVERE, null, ex);
         }
-
     }
 
 }

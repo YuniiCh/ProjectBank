@@ -256,13 +256,15 @@ public class ID3 {
 //计算信用等级
             Float credit = h.get("credit");
             Float avgCredit = avgData.get("avgCredit");
+            if(avgCredit!=null){
             if (credit > avgCredit * (1 + 0.25)) {
                 line.add("Exellent");
             } else if (credit > avgCredit) {
                 line.add("Good");
             } else if (credit > avgCredit * (1 - 0.25)) {
                 line.add("Qualified");
-            } else {
+            }}
+            else {
                 line.add("Unqualified");
             }
 //计算生命周期
@@ -314,32 +316,35 @@ public class ID3 {
             Float accountReceivable = h.get("account_receivable");
             Float avgAccountReceivable = avgData.get("account_receivable");
             String noteAccountReceivable = "few";
-            if (accountReceivable > avgAccountReceivable * (1 + 0.33)) {
+            if(accountReceivable != null){
+            if ( accountReceivable > avgAccountReceivable * (1 + 0.33)) {
                 noteAccountReceivable = "many";
             } else if (accountReceivable > avgAccountReceivable) {
                 noteAccountReceivable = "normal";
-            }
+            }}
             line.add(noteAccountReceivable);
 
 //计算营业收入等级
             Float operateProfit = h.get("operating_profit");
             Float avgOperateProfite = avgData.get("operating_profit");
             String noteOperateProfit = "bad";
+            if(operateProfit != null && avgOperateProfite != null){
             if (operateProfit > avgOperateProfite * (1 + 0.33)) {
                 noteOperateProfit = "good";
             } else if (operateProfit > avgOperateProfite) {
                 noteOperateProfit = "normal";
-            }
+            }}
             line.add(noteOperateProfit);
 //计算可用资本等级
             Float workeCapital = h.get("working_capital");
             Float avgWorkeCapital = avgData.get("working_capital");
             String noteWorkeCapital = "few";
+            if(workeCapital != null && avgWorkeCapital != null){
             if (workeCapital > avgWorkeCapital * (1 + 0.33)) {
                 noteWorkeCapital = "many";
             } else if (workeCapital > avgWorkeCapital) {
                 noteWorkeCapital = "normal";
-            }
+            }}
             line.add(noteWorkeCapital);
             finalData.add(line);
         }
@@ -364,7 +369,7 @@ public class ID3 {
 
 //		String data="C:\\Users\\zfw\\Desktop\\data1.txt";//训练数据集
 //		String test="C:\\Users\\zfw\\Desktop\\test.txt";//测试数据集
-        String result = "E:\\Informatique_dossier\\花旗商赛\\result.txt";//预测结果集
+        String result = "C:\\Users\\33641\\Desktop\\result.txt";//预测结果集
         ID3 id = new ID3(label, trainData, testData);//初始化数据
         id.print(id.date);//构建并输出决策树
         id.testdate(id.test, result);//预测数据并输出结果
