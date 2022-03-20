@@ -16,9 +16,6 @@
             // 获取数据
             HttpSession s = request.getSession(false);
             String idCompany = s.getAttribute("idC").toString();
-            if(request.getQueryString().contains("idC")){
-                idCompany = request.getParameter("idC");
-            }
             Company c = (Company) DB.findCompany(idCompany);
             if(c.getChineseName().isEmpty()){
                 out.println("<h2>" + c.getEnglishName() + "</h2>");       
@@ -38,33 +35,6 @@
             out.println("<h3>股票信息</h3><table border=\"1\">"+
                     "<tr><th>SecurityCode</th><td>" + c.getSecurityCode() + "</td><th>SecurityType</th><td>" + c.getSecurityType() + 
                     "</td></tr><tr><th>ListingDate</th><td>" + c.getListingDate() + "</td><th>ListingExchange</th><td>" + c.getListingExchange() + "</td></tr></table>");
-            // 读取数据
-//             out.println("<table border=\"1\" width=\"83%\">");
-//            out.println("<tr><th>Id Company</th><th>EnglishName</th><th>ChineseName</th>"+
-//                    "<th>CreateDate</th><th>Industry</th><th>SecurityCode</th>"+
-//                    "<th>SecurityType</th><th>ListingDate</th><th>ListingExchange</th>"+
-//                    "<th>Chairman</th><th>Employees</th><th>Tel</th>"+
-//                    "<th>Fax</th><th>Email</th><th>Website</th>"+
-//                    "<th>RegisteredAddress</th><th>OfficeAddress</th></tr>");
-//            out.println("<tr><td>" + c.getIdC() + "</td>" + 
-//                        "<td>" + c.getEnglishName() + "</td>" +
-//                        "<td>" + c.getChineseName() + "</td>" +
-//                        "<td>" + c.getCreateDate() + "</td>" +
-//                        "<td>" + c.getIndustry() + "</td>" +
-//                        "<td>" + c.getSecurityCode() + "</td>" +
-//                        "<td>" + c.getSecurityType() + "</td>" +
-//                        "<td>" + c.getListingDate() + "</td>" +
-//                        "<td>" + c.getListingExchange() + "</td>" +
-//                        "<td>" + c.getChairman() + "</td>" +
-//                        "<td>" + c.getEmployees() + "</td>" +
-//                        "<td>" + c.getTel() + "</td>" +
-//                        "<td>" + c.getFax() + "</td>" +
-//                        "<td>" + c.getEmail() + "</td>" +
-//                        "<td>" + c.getWebsite() + "</td>" +
-//                        "<td>" + c.getRegisteredAddress() + "</td>" +
-//                        "<td>" + c.getOfficeAddress() + "</td></tr>");                                               
-//            
-//            out.println("</table>");
         %>
         <br/>
         <a id="welcome" href="WelcomePageCtrl?fct"> Return home </a>

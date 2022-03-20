@@ -11,6 +11,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.bd.DB;
 import org.object.Company;
 import org.object.Finance;
@@ -22,16 +23,12 @@ import org.object.Finance;
 public class CompanyInfoCtrl extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, Exception {
-if(request.getQueryString().contains("idC")){
-System.out.println("get idC: " + request.getParameter("idC"));
-}
         String c = request.getParameter("idC");
         String msg_avert = "";
-        System.out.println("idC" + c);
         if (!c.isEmpty()) {
             RequestDispatcher rd = request.getRequestDispatcher("VisitorInfo");
-            System.out.println("VisitorInfo" + c);
-            request.setAttribute("idC", c);
+            HttpSession session = request.getSession(true);
+            session.setAttribute("idC", c);
             rd.forward(request, response);
         } else {
             RequestDispatcher rd = request.getRequestDispatcher("AllCompanyInfos");
