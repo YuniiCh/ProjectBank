@@ -19,11 +19,11 @@
     <body>
         <h1>Hello World!</h1>
         <%
-            HashMap<String, List<Float>> data = new HashMap<>();
+            HashMap<String, HashMap<String,Float>> data = new HashMap<>();
             try{
                 data = DB.findData();
-                for (List<Float> fl : data.values()) {
-                for (float f : fl) {
+                for (HashMap<String,Float> fl: data.values()) {
+                for (float f : fl.values()) {
                     out.println(f);
                 }
              }
